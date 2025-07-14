@@ -4,22 +4,28 @@ import { MovieView } from "../movie-view/movie-view.jsx";
 
 export const MainView = () => {
   const [movies, setMovies] = useState([]);
+
   useEffect(() => {
-    fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/")
-      .then((response) => response.json())
+    fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/movies")
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
-        const moviesFromApi = data.docs.map((doc) => {
-          return {
-            id: doc.key,
-            title: doc.title,
-            image: doc.image,
-            director: doc.director_name?.[0],
-            description: doc.description,
-            genre: doc.genre
-          };
-        });
+        console.log('Fetched data:', data);
+
+        const moviesFromApi = data.map((movie) => ({
+          id: movie._id,
+          title: movie.Title,
+          description: movie.Description,
+          director: movie.Director?.Name,
+          genre: movie.Genre?.Name,
+          image: movie.ImagePath
+        }));
 
         setMovies(moviesFromApi);
+      })
+      .catch((error) => {
+        console.error("Fetch failed:", error);
       });
   }, []);
 
