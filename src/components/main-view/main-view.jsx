@@ -1,37 +1,33 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MovieCard } from "../movie-card/movie-card.jsx";
 import { MovieView } from "../movie-view/movie-view.jsx";
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: "Get Out",
-      description: "A chilling horror film about a family confronted by their doppelgängers in a tense and symbolic struggle.",
-      genre: "Horror",
-      director: "Jordan Peele",
-      image: "https://image.tmdb.org/t/p/original/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg"
+  const [movies, setMovies] = useState([]);
 
-    },
+  useEffect(() => {
+    fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/movies")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Fetched data:', data);
 
-    {
-      id: 2,
-      title: "Arrival",
-      description: "A cerebral sci-fi drama about a linguist working to communicate with alien visitors, exploring time and loss.",
-      genre: "Thriller",
-      director: "Denis Villeneuve",
-      image: "https://image.tmdb.org/t/p/original/pEzNVQfdzYDzVK0XqxERIw2x2se.jpg",
-    },
+        const moviesFromApi = data.map((movie) => ({
+          id: movie._id,
+          title: movie.Title,
+          description: movie.Description,
+          director: movie.Director?.Name,
+          genre: movie.Genre?.Name,
+          image: movie.ImagePath
+        }));
 
-    {
-      id: 3,
-      title: "Parasite",
-      description: "A darkly comic thriller about class disparity, deception, and infiltration that escalates into violence.",
-      genre: "Drama",
-      director: "Bong Joon-ho",
-      image: "https://image.tmdb.org/t/p/original/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
-    },
-  ]);
+        setMovies(moviesFromApi);
+      })
+      .catch((error) => {
+        console.error("Fetch failed:", error);
+      });
+  }, []);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
 
