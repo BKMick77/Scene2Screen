@@ -12,6 +12,8 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   );
 };
 
+//added nesting w/ .shape to match DB structure
+//didn't help document rendering issue
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
