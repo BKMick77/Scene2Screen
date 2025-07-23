@@ -7,10 +7,11 @@ import { SignupView } from '../signup-view/signup-view.jsx';
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser ? storedUser : null);
-  const [token, setToken] = useState(storedToken ? setToken : null);
+  const [user, setUser] = useState(storedUser || null);
+  const [token, setToken] = useState(storedToken || null);
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -18,13 +19,22 @@ export const MainView = () => {
       return;
     }
 
+    setIsLoading(true);
+
     fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then((response) => response.json())
       .then((moviesFromApi) => {
+        console.log("Fetched Movies:", moviesFromApi);
         setMovies(moviesFromApi);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        setIsLoading(false);
       });
+
   }, [token]);
 
   if (!user) {
@@ -52,6 +62,10 @@ export const MainView = () => {
     );
   }
 
+  if (isLoading) {
+    return <div>Loading movies...</div>;
+  }
+
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
@@ -60,7 +74,7 @@ export const MainView = () => {
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
+          key={movie._id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
             setSelectedMovie(newSelectedMovie);

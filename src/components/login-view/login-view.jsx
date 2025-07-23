@@ -8,12 +8,12 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password,
+      Username: username,
+      Password: password,
     };
 
     fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/login", {
-      method: "Post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -31,6 +31,7 @@ export const LoginView = ({ onLoggedIn }) => {
         }
       })
       .catch((e) => {
+        console.error("Login Failed", e);
         alert("Something is wrong")
       });
   };
@@ -44,7 +45,7 @@ export const LoginView = ({ onLoggedIn }) => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
-          minLength="6"
+          minLength="4"
         />
       </label>
       <label>
