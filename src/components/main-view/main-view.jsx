@@ -1,9 +1,10 @@
-import "./movie-view.scss";
 import { useEffect, useState } from 'react'
 import { MovieCard } from "../movie-card/movie-card.jsx";
 import { MovieView } from "../movie-view/movie-view.jsx";
 import { LoginView } from '../login-view/login-view.jsx';
 import { SignupView } from '../signup-view/signup-view.jsx';
+import { NavbarView } from "../navbar-view/navbar-view.jsx"
+import { Row, Col, Button } from "react-bootstrap";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -19,8 +20,6 @@ export const MainView = () => {
     if (!token) {
       return;
     }
-
-    setIsLoading(true);
 
     fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` }
@@ -38,47 +37,70 @@ export const MainView = () => {
 
   }, [token]);
 
-  if (!user) {
-    return (
-      <>
-        login
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-        />
-        or sign up for an account
-        <SignupView />
-      </>
-    );
-  }
-
-  if (selectedMovie) {
-    return (
-      <>
-        <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-        <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
-      </>
-    );
-  }
-
-
-  if (movies.length === 0) {
-    return <div>The list is empty!</div>;
-  }
 
   return (
-    <div>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
-          }}
-        />
-      ))}
-    </div>
+    <>
+      <NavbarView
+        user={user}
+        onHome={() => setSelectedMovie(null)}
+        onLogout={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      />
+
+
+      <Row className='gx-0 justify-content-md-center'>
+        {!user ? (
+
+          <Col md={5}>
+            <LoginView
+              onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+              }}
+            />
+            or sign up for an account
+            <SignupView />
+          </Col>
+
+        ) : selectedMovie ? (
+          <>
+            <Col md={8}>
+              <MovieView
+                movie={selectedMovie}
+                onBackClick={() => setSelectedMovie(null)}
+              />
+              <Button
+                onClick={() => {
+                  setUser(null);
+                  setToken(null);
+                  localStorage.clear();
+                }}
+                style={{ width: "100px" }}
+              >
+                Logout
+              </Button>
+            </Col>
+          </>
+        ) : movies.length === 0 ? (
+          <div>The list is empty!</div>
+        ) : (
+          <>
+            {movies.map((movie) => (
+              <Col className="mb-5" key={movie._id} xs={8} md={6} lg={4} xl={3}>
+                <MovieCard
+                  movie={movie}
+                  onMovieClick={(newSelectedMovie) => {
+                    setSelectedMovie(newSelectedMovie);
+                  }}
+                />
+              </Col>
+            ))}
+          </>
+        )}
+      </Row>
+    </>
   );
 };

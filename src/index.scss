@@ -1,5 +1,19 @@
-$color: steelblue;
+$primary: #6EA3FE;
+$body-bg: #1A1B27;
+$body-color: #ffff;
 
-.my-flix {
-  color: $color;
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+.navbar {
+  width: 100vw;
+  margin: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  border-bottom: 2px solid red;
 }
+
+// * {
+//   outline: 1px solid red;
+// }
