@@ -12,25 +12,16 @@ export const MovieCard = ({ movie, onMovieClick }) => {
   );
 };
 
-//added nesting w/ .shape to match DB structure
-//didn't help document rendering issue
+
+
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
-    Image: PropTypes.string,
+    ImagePath: PropTypes.string,
     Description: PropTypes.string,
-    Director: PropTypes.shape({
-      Name: PropTypes.string
-    }),
-    Genre: PropTypes.shape({
-      Name: PropTypes.string
-    })
   }).isRequired,
-  onMovieClick: PropTypes.func
+  onMovieClick: PropTypes.func.isRequired
 };
-
-
 
 //THIS RENDERS!!!!
 
