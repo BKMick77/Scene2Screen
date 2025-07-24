@@ -1,3 +1,4 @@
+import "./movie-view.scss";
 import { useEffect, useState } from 'react'
 import { MovieCard } from "../movie-card/movie-card.jsx";
 import { MovieView } from "../movie-view/movie-view.jsx";
@@ -62,9 +63,6 @@ export const MainView = () => {
     );
   }
 
-  if (isLoading) {
-    return <div>Loading movies...</div>;
-  }
 
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
