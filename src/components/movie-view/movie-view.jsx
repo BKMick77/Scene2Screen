@@ -1,3 +1,6 @@
+import "./movie-view.scss";
+import { Button } from "react-bootstrap";
+
 export const MovieView = ({ movie, onBackClick }) => {
   console.log("Rendering MovieCard:", movie);
 
@@ -8,7 +11,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <img
           src={movie.ImagePath}
           alt={movie.Title}
-          style={{ width: "300px", height: "auto", display: "block", marginBottom: "1rem" }}
+          style={{ width: "100%", height: "auto", display: "block", marginBottom: "1rem" }}
         />     </div>
 
       <div>
@@ -30,7 +33,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         <span>{movie.Genre?.Name}</span>
       </div>
 
-      <div> <button onClick={onBackClick}>Back</button>
+      <div> <Button onClick={onBackClick} className="mb-2" style={{ width: "100px" }}>Back</Button>
       </div>
 
     </div>

@@ -1,18 +1,22 @@
 import PropTypes from "prop-types";
+import { Card } from "react-bootstrap";
 
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    <div
-      onClick={() => {
-        onMovieClick(movie);
-      }}
-    >
-      {movie.Title}
-    </div>
+    <Card
+      onClick={() => onMovieClick(movie)}
+      style={{ cursor: "pointer" }}
+      className="h-100" >
+      <Card.Img variant="top" src={movie.ImagePath}
+        style={{ width: "300px", height: "auto", display: "block", marginBottom: "1rem" }} />
+
+      <Card.Body>
+        <Card.Title>{movie.Title}</Card.Title>
+        <Card.Text>{movie.Director?.Name}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
-
-
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
@@ -23,17 +27,3 @@ MovieCard.propTypes = {
   onMovieClick: PropTypes.func.isRequired
 };
 
-//THIS RENDERS!!!!
-
-// export const MovieCard = ({ movie }) => {
-//   console.log("Rendering MovieCard:", movie);
-//   return (
-//     <div>
-//       <h2>{movie.Title}</h2>
-//       <p>ID: {movie._id}</p>
-//       <p>Director: {movie.Director?.Name}</p>
-//       <p>Genre: {movie.Genre?.Name}</p>
-//       <p>{movie.ImagePath}</p>
-//     </div>
-//   );
-// };
