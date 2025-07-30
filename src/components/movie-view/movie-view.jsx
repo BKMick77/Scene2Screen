@@ -1,8 +1,56 @@
-import "./movie-view.scss";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
-  console.log("Rendering MovieCard:", movie);
+export const MovieView = ({ movies, user, token, setUser }) => {
+  const { movieId } = useParams();
+
+  console.log("movieId from URL:", movieId);
+  console.log("movies from props:", movies);
+  console.log("movie._id values:", movies.map((m) => m._id));
+
+  const movie = movies.find((m) => m._id === movieId);
+
+  const isFavorite = user?.FavoriteMovies?.includes(movie._id);
+
+  const handleToggleFavorites = () => {
+    const method = isFavorite ? "DELETE" : "POST";
+    const url = `https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}/movies/${movie._id}`;
+
+    fetch(url, {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Favorite toggle failed");
+
+        //Don't parse the response — just refetch user
+        return fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      })
+      .then((res) => {
+        if (!res.ok) throw new Error("User fetch failed");
+        return res.json();
+      })
+      .then((updatedUser) => {
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+      })
+      .catch((err) => {
+        console.error("toggle error", err);
+      });
+  };
+  if (!movie) {
+    return <div>Movie not found</div>;
+  }
 
   return (
     <div>
@@ -11,8 +59,8 @@ export const MovieView = ({ movie, onBackClick }) => {
         <img
           src={movie.ImagePath}
           alt={movie.Title}
-          style={{ width: "100%", height: "auto", display: "block", marginBottom: "1rem" }}
-        />     </div>
+          style={{ width: "100%", height: "auto", display: "block", marginBottom: "1rem" }} />
+      </div>
 
       <div>
         <span> Title: </span>
@@ -33,9 +81,32 @@ export const MovieView = ({ movie, onBackClick }) => {
         <span>{movie.Genre?.Name}</span>
       </div>
 
-      <div> <Button onClick={onBackClick} className="mb-2" style={{ width: "100px" }}>Back</Button>
-      </div>
+      <div className="d-flex flex-column gap-2 mb-2 align-items-start">
+        <Button
+          variant="light"
+          onClick={handleToggleFavorites}
+          className="mb-2"
+          style={{
+            backgroundColor: "transparent",
+            border: "none",
+            boxShadow: "none",
+            fontSize: "2rem",
+            display: "block",
+            marginLeft: 0,
+            color: isFavorite ? "red" : "red",
+          }}
+        >
+          {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+        </Button>
 
+        <Link to={'/'}>
+          <Button className="mb-2" style={{ width: "100px" }}>Back</Button>
+        </Link>
+      </div>
     </div>
   );
 };
+
+
+
+
