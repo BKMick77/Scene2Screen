@@ -78,7 +78,7 @@ export const SignupView = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">Register</Button>
+      <Button variant="outline-primary" type="submit" className="mt-3">Register</Button>
     </Form>
   );
 };
