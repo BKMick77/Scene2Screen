@@ -63,8 +63,26 @@ export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
       });
   };
 
+  const handleRemoveFavorite = (movieId) => {
+    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    }).then((response) => {
+      if (response.ok) {
+        const updateUser = {
+          ...user,
+          FavoriteMovies: user.FavoriteMovies.filter((id) => id !== movieId)
+        };
+        setUser(updateUser);
+        localStorage.setItem("user", JSON.stringify(updateUser));
+      } else {
+        alert("Could not remove favorite");
+      }
+    });
+  };
+
   return (
-    <Container fluid className="px-4 my-4">
+    <>
       <Row className="gx-4 gy-4">
         <Col xs={12} lg={3}>
           <Card className="w-100 h-100">
@@ -75,7 +93,7 @@ export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
         </Col>
 
         <Col xs={12} lg={9}>
-          <Card className="w-100 h-100">
+          <Card className="w-50 h-50">
             <Card.Body>
               <UpdateUser
                 username={username}
@@ -94,12 +112,19 @@ export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
         </Col>
       </Row>
 
-      <Row className="mt-5">
-        <Col xs={12}>
-          <FavoriteMovies user={user} movies={movies} />
-        </Col>
-      </Row>
-    </Container>);
+      <Container className="mt-4 px-4">
+        <Row>
+          <Col>
+            <FavoriteMovies
+              user={user}
+              movies={movies}
+              handleRemoveFavorite={handleRemoveFavorite}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 };
 
 
