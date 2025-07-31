@@ -9,18 +9,11 @@ export const NavbarView = ({ user, onLogout }) => {
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="me-auto">
-            {!user ? (
-              <>
-                <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
-              </>
-            ) : (
-              <>
-                <Nav.Link as={Link} to="/">Home</Nav.Link>
-                <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-                <Nav.Link onClick={onLogout}>Logout</Nav.Link>
-              </>
-            )}
+            <>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+              <Nav.Link onClick={onLogout}>Logout</Nav.Link>
+            </>
           </Nav>
         </Navbar.Collapse>
       </Container>
