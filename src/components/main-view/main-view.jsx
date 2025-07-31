@@ -4,24 +4,34 @@ import { MovieView } from "../movie-view/movie-view.jsx";
 import { LoginView } from '../login-view/login-view.jsx';
 import { SignupView } from '../signup-view/signup-view.jsx';
 import { NavbarView } from "../navbar-view/navbar-view.jsx"
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Container } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from '../profile-view/profile-view.jsx';
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser || null);
-  const [token, setToken] = useState(storedToken || null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleLogin = (user, token) => {
+    setUser(user);
+    setToken(token);
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+  };
 
   useEffect(() => {
     if (!token) {
       return;
     }
+
+    setIsLoading(true);
 
     fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}` }
@@ -53,7 +63,7 @@ export const MainView = () => {
           }}
         />
 
-        <Row>
+        <Row className='gx-0 justify-content-md-center'>
           <Routes>
             <Route
               path="/signup"
@@ -62,7 +72,7 @@ export const MainView = () => {
                   {user ? (
                     <Navigate to="/" />
                   ) : (
-                    <Col md={5}>
+                    <Col md={5} className='mt-4'>
                       <SignupView />
                     </Col>
                   )}
@@ -77,9 +87,8 @@ export const MainView = () => {
                   {user ? (
                     <Navigate to="/" />
                   ) : (
-                    <Col md={5}>
-                      <LoginView onLoggedIn={(user) => setUser(user)} />
-                    </Col>
+                    <Col md={5} className='mt-4'>
+                      <LoginView onLoggedIn={handleLogin} />                    </Col>
                   )}
                 </>
 
@@ -91,7 +100,7 @@ export const MainView = () => {
                 !user ? (
                   <Navigate to="/login" />
                 ) : (
-                  <Col md={8}>
+                  <Col>
                     <ProfileView
                       user={user}
                       token={token}
@@ -134,16 +143,20 @@ export const MainView = () => {
                 <>
                   {!user ? (
                     <Navigate to="/login" replace />
+                  ) : isLoading ? (
+                    <Col>Loading movies...</Col>
                   ) : movies.length === 0 ? (
                     <Col>The list is empty!</Col>
                   ) : (
-                    <>
-                      {movies.map((movie) => (
-                        <Col className="mb-4" key={movie._id} xs={8} md={6} lg={4} xl={3}>
-                          <MovieCard movie={movie} />
-                        </Col>
-                      ))}
-                    </>
+                    <Container className="mt-4 px-4">
+                      <Row className="gx-0 justify-content-md-center">
+                        {movies.map((movie) => (
+                          <Col className="mb-4" key={movie._id} xs={8} md={6} lg={4} xl={3}>
+                            <MovieCard movie={movie} />
+                          </Col>
+                        ))}
+                      </Row>
+                    </Container>
                   )}
                 </>
               }
