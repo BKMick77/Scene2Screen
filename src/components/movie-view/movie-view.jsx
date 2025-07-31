@@ -29,7 +29,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
       .then((res) => {
         if (!res.ok) throw new Error("Favorite toggle failed");
 
-        //Don't parse the response — just refetch user
+
         return fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
           headers: {
             Authorization: `Bearer ${token}`
@@ -53,13 +53,21 @@ export const MovieView = ({ movies, user, token, setUser }) => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        maxWidth: "600px",
+        marginLeft: "auto",
+        marginRight: "2rem",
+        textAlign: "left",
+        padding: ".5rem"
+      }}
+    >
 
       <div>
         <img
           src={movie.ImagePath}
           alt={movie.Title}
-          style={{ width: "100%", height: "auto", display: "block", marginBottom: "1rem" }} />
+          style={{ width: "100%", maxWidth: "450px", height: "auto", display: "block", marginBottom: "1rem" }} />
       </div>
 
       <div>
@@ -81,7 +89,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
         <span>{movie.Genre?.Name}</span>
       </div>
 
-      <div className="d-flex flex-column gap-2 mb-2 align-items-start">
+      <div className="d-flex gap-3 mt-3 align-items-start">
         <Button
           variant="light"
           onClick={handleToggleFavorites}
@@ -100,7 +108,11 @@ export const MovieView = ({ movies, user, token, setUser }) => {
         </Button>
 
         <Link to={'/'}>
-          <Button className="mb-2" style={{ width: "100px" }}>Back</Button>
+          <Button
+            variant="outline-secondary"
+            style={{ marginTop: "11px" }}>
+            Back
+          </Button>
         </Link>
       </div>
     </div>
