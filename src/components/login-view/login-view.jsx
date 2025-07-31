@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = ({ onLoggedIn, onSignupClick }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,34 +39,48 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formUsername">
 
-        <Form.Label>Username:</Form.Label>
+          <Form.Label>Username:</Form.Label>
 
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength="4"
-        />
-      </Form.Group>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            minLength="4"
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formPassword">
+        <Form.Group controlId="formPassword">
 
-        <Form.Label>Password:</Form.Label>
+          <Form.Label>Password:</Form.Label>
 
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-      <Button variant="outline-primary" type="submit" className="mt-3">Login</Button>
-    </Form>
+        <Button variant="outline-primary" type="submit" className="mt-3">Login</Button>
+      </Form>
+
+      <div className="mt-3 text-center">
+        <span>Don't have an account?</span>
+        <button
+          type="button"
+          className="btn btn-link p-0"
+          onClick={onSignupClick}
+          style={{ textDecoration: "underline" }}
+        >
+          Sign up here
+        </button>
+      </div>
+    </>
   );
 };
 

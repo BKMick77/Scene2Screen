@@ -7,6 +7,8 @@ import { NavbarView } from "../navbar-view/navbar-view.jsx"
 import { Row, Col, Button, Container } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from '../profile-view/profile-view.jsx';
+import { LoginModal } from '../../login-modal/login-modal.jsx';
+import { SignupModal } from '../signup-modal/signup-modal.jsx';
 
 export const MainView = () => {
   const [user, setUser] = useState(() => {
@@ -18,6 +20,8 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   const handleLogin = (user, token) => {
     setUser(user);
@@ -49,6 +53,14 @@ export const MainView = () => {
 
   }, [token]);
 
+  useEffect(() => {
+    if (!user) {
+      setShowLoginModal(true);
+    } else {
+      setShowLoginModal(false);
+    }
+  }, [user]);
+
 
   return (
     <>
@@ -63,37 +75,55 @@ export const MainView = () => {
           }}
         />
 
-        <Row className='gx-0 justify-content-md-center'>
-          <Routes>
-            <Route
-              path="/signup"
-              element={
-                <>
-                  {user ? (
-                    <Navigate to="/" />
-                  ) : (
-                    <Col md={5} className='mt-4'>
-                      <SignupView />
-                    </Col>
-                  )}
-                </>
+        <LoginModal
+          show={showLoginModal}
+          onHide={() => setShowLoginModal(false)}
+          onSignupClick={() => {
+            console.log("Signup click fired");
+            setShowLoginModal(false);
+            setShowSignupModal(true);
+          }}
+          onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("token", token);
+            setShowLoginModal(false);
+            setShowLoginModal(true);
+          }}
+        />
 
-              }
-            />
+        <SignupModal
+          show={showSignupModal}
+          onHide={() => setShowSignupModal(false)}
+          onLoginClick={() => {
+            console.log("Login click fired");
+            setShowSignupModal(false);
+            setShowLoginModal(true);
+          }}
+          onSignedUp={(user, token) => {
+            setUser(user);
+            setToken(token);
+            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("token", token);
+            setShowSignupModal(false);
+          }}
+        />
+
+        <Row className='gx-0 justify-content-md-center'>
+
+          <Routes>
+
             <Route
               path="/login"
-              element={
-                <>
-                  {user ? (
-                    <Navigate to="/" />
-                  ) : (
-                    <Col md={5} className='mt-4'>
-                      <LoginView onLoggedIn={handleLogin} />                    </Col>
-                  )}
-                </>
-
-              }
+              element={user ? <Navigate to="/" /> : null}
             />
+
+            <Route
+              path="/signup"
+              element={user ? <Navigate to="/" /> : null}
+            />
+
             <Route
               path="/profile"
               element={

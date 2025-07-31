@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-export const SignupView = () => {
+export const SignupView = ({ onLoginClick }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -35,51 +35,65 @@ export const SignupView = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <>
+      <Form onSubmit={handleSubmit}>
 
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength="3"
-        />
-      </Form.Group>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            minLength="3"
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formEmail">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group controlId="formBirthday">
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control
-          type="date"
-          value={birthday}
-          onChange={(e) => setBirthday(e.target.value)}
-          required
-        />
-      </Form.Group>
+        <Form.Group controlId="formBirthday">
+          <Form.Label>Birthday:</Form.Label>
+          <Form.Control
+            type="date"
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+            required
+          />
+        </Form.Group>
 
-      <Button variant="outline-primary" type="submit" className="mt-3">Register</Button>
-    </Form>
+        <Button variant="outline-primary" type="submit" className="mt-3">Register</Button>
+      </Form>
+
+      <div className="mt-3 text-center">
+        <span>Already have an account?</span>
+        <button
+          type="button"
+          className="btn btn-link p-0"
+          onClick={onLoginClick}
+          style={{ textDecoration: "underline" }}
+        >
+          Log in here
+        </button>
+      </div>
+    </>
   );
 };
 
