@@ -148,10 +148,10 @@ export const MainView = () => {
                   ) : movies.length === 0 ? (
                     <Col>The list is empty!</Col>
                   ) : (
-                    <Container className="mt-4 px-4">
-                      <Row className="gx-0 justify-content-md-center">
+                    <Container fluid className="mt-4 px-4">
+                      <Row className="gx-4 gy-4 justify-content-md-center">
                         {movies.map((movie) => (
-                          <Col className="mb-4" key={movie._id} xs={8} md={6} lg={4} xl={3}>
+                          <Col className="mb-4" key={movie._id} xs={12} sm={6} md={4} lg={3}>
                             <MovieCard movie={movie} />
                           </Col>
                         ))}
