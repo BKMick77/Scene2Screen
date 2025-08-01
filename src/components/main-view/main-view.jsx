@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from '../profile-view/profile-view.jsx';
 import { LoginModal } from '../../login-modal/login-modal.jsx';
 import { SignupModal } from '../signup-modal/signup-modal.jsx';
+import { UserInfoModal } from '../user-info-modal/user-info-modal.jsx';
 
 export const MainView = () => {
   const [user, setUser] = useState(() => {
@@ -22,6 +23,7 @@ export const MainView = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showUserInfoModal, setShowUserInfoModal] = useState(false);
 
   const handleLogin = (user, token) => {
     setUser(user);
@@ -73,6 +75,7 @@ export const MainView = () => {
             setToken(null);
             localStorage.clear();
           }}
+          onShowUserInfo={() => setShowUserInfoModal(true)}
         />
 
         <LoginModal
@@ -108,6 +111,12 @@ export const MainView = () => {
             localStorage.setItem("token", token);
             setShowSignupModal(false);
           }}
+        />
+
+        <UserInfoModal
+          show={showUserInfoModal}
+          onHide={() => setShowUserInfoModal(false)}
+          user={user}
         />
 
         <Row className='gx-0 justify-content-md-center'>
