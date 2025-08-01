@@ -1,23 +1,31 @@
 import { useState } from "react";
-import { Form, Card, Button, Row, Col, Container } from "react-bootstrap";
+import { Card, Row, Col, Container } from "react-bootstrap";
 import { UserInfo } from "./user-info";
 import { UpdateUser } from "./update-user";
 import { FavoriteMovies } from "./favorite-movies";
 
 export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (newPassword !== confirmPassword) {
+      return;
+    }
+
     const updatedData = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
+      username,
+      currentPassword,
+      newPassword,
+      email,
+      birthday
     };
 
     fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
@@ -98,8 +106,12 @@ export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
               <UpdateUser
                 username={username}
                 setUsername={setUsername}
-                password={password}
-                setPassword={setPassword}
+                confirmPassword={confirmPassword}
+                setConfirmPassword={setConfirmPassword}
+                newPassword={newPassword}
+                setNewPassword={setNewPassword}
+                currentPassword={currentPassword}
+                setCurrentPassword={setCurrentPassword}
                 email={email}
                 setEmail={setEmail}
                 birthday={birthday}

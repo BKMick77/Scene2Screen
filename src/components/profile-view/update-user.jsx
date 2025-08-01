@@ -3,14 +3,18 @@ import { Form, Button } from "react-bootstrap";
 export const UpdateUser = ({
   username,
   setUsername,
-  password,
-  setPassword,
+  newPassword,
+  setNewPassword,
   email,
   setEmail,
   birthday,
   setBirthday,
   handleSubmit,
-  handleDelete
+  handleDelete,
+  confirmPassword,
+  setConfirmPassword,
+  currentPassword,
+  setCurrentPassword,
 }) => {
 
   return (
@@ -18,29 +22,54 @@ export const UpdateUser = ({
       <h4>Update Info</h4>
       <Form onSubmit={handleSubmit}>
 
-        <Form.Group controlId="formUsername">
+        <Form.Group controlId="formUsername" className="mb-3">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
             minLength="3"
+            required
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
+        <Form.Group controlId="formCurrentPassword" className="mb-3">
+          <Form.Label>Current Password:</Form.Label>
           <Form.Control
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Leave blank to keep currennt password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formNewPassword" className="mb-3">
+          <Form.Label>New Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="Leave blank to keep current password"
 
           />
         </Form.Group>
 
-        <Form.Group controlId="formEmail">
+        <Form.Group controlId="formConfirmPassword" className="mb-3">
+          <Form.Label>Confirm New Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={confirmPassword}
+            isInvalid={confirmPassword && confirmPassword !== newPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required={!!newPassword}
+          />
+          <Form.Control.Feedback type="invalid">
+            Passwords do not match
+          </Form.Control.Feedback>
+        </Form.Group>
+
+
+        <Form.Group controlId="formEmail" className="mb-3">
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
@@ -50,7 +79,7 @@ export const UpdateUser = ({
           />
         </Form.Group>
 
-        <Form.Group controlId="formBirthday">
+        <Form.Group controlId="formBirthday" className="mb-3">
           <Form.Label>Birthday:</Form.Label>
           <Form.Control
             type="date"
