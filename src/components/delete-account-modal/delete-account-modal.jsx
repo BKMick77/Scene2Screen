@@ -9,7 +9,7 @@ export const DeleteAccountModal = ({ show, onHide, onConfirm }) => (
       <p>Are you sure you want to delete your account?</p>
       <p>This action <strong>cannot be undone!</strong></p>
     </Modal.Body>
-    <Modal.Footer>
+    <Modal.Footer className="d-flex justify-content-between mt-4">
       <Button variant="outline-primary" onClick={onHide}>Cancel</Button>
       <Button variant="outline-danger" onClick={onConfirm}>Delete Account</Button>
     </Modal.Footer>
