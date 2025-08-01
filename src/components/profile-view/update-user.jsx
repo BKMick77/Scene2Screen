@@ -1,4 +1,4 @@
-import { Form, Button, FloatingLabel } from "react-bootstrap";
+import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
 
 export const UpdateUser = ({
   username,
@@ -21,71 +21,83 @@ export const UpdateUser = ({
     <div>
       <Form onSubmit={handleSubmit}>
 
-        <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder=" "
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            minLength="3"
-            required
-          />
-        </FloatingLabel>
+        <Row className="g-3">
+          <Col md={6}>
+            <FloatingLabel controlId="formUsername" label="Username">
+              <Form.Control
+                type="text"
+                placeholder=" "
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                minLength="3"
+                required
+              />
+            </FloatingLabel>
+          </Col>
 
-        <FloatingLabel controlId="formCurrentPassword" label="Current Password" className="mb-3">
-          <Form.Control
-            type="password"
-            placeholder=" "
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            required
-          />
-        </FloatingLabel>
+          <Col md={6}>
+            <FloatingLabel controlId="formEmail" label="Email">
+              <Form.Control
+                type="email"
+                placeholder=" "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </FloatingLabel>
+          </Col>
 
-        <FloatingLabel controlId="formNewPassword" label="New Password" className="mb-3">
-          <Form.Control
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="Leave blank to keep current password"
+          <Col md={6}>
+            <FloatingLabel controlId="formCurrentPassword" label="Current Password">
+              <Form.Control
+                type="password"
+                placeholder=" "
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                required
+              />
+            </FloatingLabel>
+          </Col>
 
-          />
-        </FloatingLabel>
+          <Col md={6}>
+            <FloatingLabel controlId="formNewPassword" label="New Password">
+              <Form.Control
+                type="password"
+                placeholder="Leave blank to keep current password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </FloatingLabel>
+          </Col>
 
-        <FloatingLabel controlId="formConfirmPassword" label="Confirm New Password" className="mb-3">
-          <Form.Control
-            type="password"
-            placeholder=" "
-            value={confirmPassword}
-            isInvalid={confirmPassword && confirmPassword !== newPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required={!!newPassword}
-          />
-          <Form.Control.Feedback type="invalid">
-            Passwords do not match
-          </Form.Control.Feedback>
-        </FloatingLabel>
+          <Col md={6}>
+            <FloatingLabel controlId="formConfirmPassword" label="Confirm New Password">
+              <Form.Control
+                type="password"
+                placeholder=" "
+                value={confirmPassword}
+                isInvalid={confirmPassword && confirmPassword !== newPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required={!!newPassword}
+              />
+              <Form.Control.Feedback type="invalid">
+                Passwords do not match
+              </Form.Control.Feedback>
+            </FloatingLabel>
+          </Col>
 
-
-        <FloatingLabel controlId="formEmail" label="Email" className="mb-3">
-          <Form.Control
-            type="email"
-            placeholder=" "
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </FloatingLabel>
-
-        <FloatingLabel controlId="formBirthday" label="Birthday" className="mb-3">
-          <Form.Control
-            type="date"
-            placeholder=" "
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-            required
-          />
-        </FloatingLabel>
+          <Col md={6}>
+            <FloatingLabel controlId="formBirthday" label="Birthday">
+              <Form.Control
+                type="date"
+                placeholder=" "
+                value={birthday}
+                onChange={(e) => setBirthday(e.target.value)}
+                required
+              />
+            </FloatingLabel>
+          </Col>
+        </Row>
 
         <div className="d-flex justify-content-between mt-4">
           <Button variant="outline-primary" type="submit">Update Profile</Button>
