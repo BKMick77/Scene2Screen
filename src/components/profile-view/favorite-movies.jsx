@@ -22,11 +22,11 @@ export const FavoriteMovies = ({ user, movies, handleRemoveFavorite }) => {
                     variant="top"
                     src={movie.ImagePath}
                     style={{
-                      width: "100%",         // ✅ fills its column
-                      maxWidth: "500px",     // ✅ prevents being too wide
+                      width: "100%",
+                      maxWidth: "500px",
                       height: "auto",
                       display: "block",
-                      margin: "0 auto 1rem"       // ✅ centers the image
+                      margin: "0 auto 1rem"
                     }}
                   />
                   <Card.Body>
