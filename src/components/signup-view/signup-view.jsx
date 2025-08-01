@@ -6,6 +6,7 @@ export const SignupView = ({ onLoginClick }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
 
   const handleSubmit = (event) => {
@@ -38,7 +39,7 @@ export const SignupView = ({ onLoginClick }) => {
     <>
       <Form onSubmit={handleSubmit}>
 
-        <Form.Group controlId="formUsername">
+        <Form.Group controlId="formUsername" className="mb-3">
           <Form.Label>Username:</Form.Label>
           <Form.Control
             type="text"
@@ -49,7 +50,7 @@ export const SignupView = ({ onLoginClick }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
+        <Form.Group controlId="formPassword" className="mb-3">
           <Form.Label>Password:</Form.Label>
           <Form.Control
             type="password"
@@ -59,7 +60,22 @@ export const SignupView = ({ onLoginClick }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formEmail">
+        <Form.Group controlId="formConfirmPassword" className="mb-3">
+          <Form.Label>Confirm Password:</Form.Label>
+          <Form.Control
+            type="password"
+            value={confirmPassword}
+            isInvalid={confirmPassword && confirmPassword !== password}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Passwords do not match
+          </Form.Control.Feedback>
+        </Form.Group>
+
+
+        <Form.Group controlId="formEmail" className="mb-3">
           <Form.Label>Email:</Form.Label>
           <Form.Control
             type="email"
@@ -69,7 +85,7 @@ export const SignupView = ({ onLoginClick }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBirthday">
+        <Form.Group controlId="formBirthday" className="mb-3">
           <Form.Label>Birthday:</Form.Label>
           <Form.Control
             type="date"
