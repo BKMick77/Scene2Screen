@@ -60,6 +60,24 @@ export const MainView = () => {
 
   }, [token]);
 
+  const handleDelete = () => {
+    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Account deleted");
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        } else {
+          console.error("Failed to delete account");
+        }
+      })
+      .catch((error) => console.error("Delete error:", error));
+  };
+
   useEffect(() => {
     if (!user) {
       setShowLoginModal(true);
@@ -67,6 +85,7 @@ export const MainView = () => {
       setShowLoginModal(false);
     }
   }, [user]);
+
 
 
   return (
@@ -99,7 +118,6 @@ export const MainView = () => {
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("token", token);
             setShowLoginModal(false);
-            setShowLoginModal(true);
           }}
         />
 
