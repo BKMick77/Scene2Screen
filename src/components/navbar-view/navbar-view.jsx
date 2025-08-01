@@ -11,9 +11,10 @@ export const NavbarView = ({ user, onLogout }) => {
           <Nav className="me-auto">
             <>
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
               <NavDropdown title="Account" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Favorite Movies</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/profile">
+                  Favorite Movies
+                </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   User Information
                 </NavDropdown.Item>
