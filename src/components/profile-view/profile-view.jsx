@@ -48,28 +48,28 @@ export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
     });
   };
 
-  const handleDelete = () => {
-    if (!confirm("Are you sure you want to delete your account? Can not be undone."))
-      return;
-
-    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((response) => {
-      if (response.ok) {
-        alert("Account has been deleted.")
-        onLogout();
-      } else {
-        alert("Deletion failed")
-      }
-    })
-      .catch((err) => {
-        console.error("Deletion error", err);
-        alert("Error occured during deletion");
-      });
-  };
+  // const handleDelete = () => {
+  //   if (!confirm("Are you sure you want to delete your account? Can not be undone."))
+  //     return;
+  //
+  //   fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   }).then((response) => {
+  //     if (response.ok) {
+  //       alert("Account has been deleted.")
+  //       onLogout();
+  //     } else {
+  //       alert("Deletion failed")
+  //     }
+  //   })
+  //     .catch((err) => {
+  //       console.error("Deletion error", err);
+  //       alert("Error occured during deletion");
+  //     });
+  // };
 
   const handleRemoveFavorite = (movieId) => {
     fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
