@@ -41,7 +41,7 @@ export const LoginView = ({ onLoggedIn, onSignupClick }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formUsername">
+        <Form.Group controlId="formUsername" className="mb-3">
 
           <Form.Label>Username:</Form.Label>
 
@@ -54,7 +54,7 @@ export const LoginView = ({ onLoggedIn, onSignupClick }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
+        <Form.Group controlId="formPassword" className="mb-3">
 
           <Form.Label>Password:</Form.Label>
 
