@@ -1,7 +1,14 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavbarView = ({ user, onLogout, onShowUserInfo, onShowUpdateUser }) => {
+export const NavbarView = ({
+  user,
+  onLogout,
+  onShowUserInfo,
+  onShowUpdateUser,
+  onShowDeleteModal,
+}) => {
+
   return (
     <Navbar bg="dark" data-bs-theme="dark" expand="lg" sticky="top" className="px-4">
       <Container fluid className="px-0">
@@ -28,7 +35,7 @@ export const NavbarView = ({ user, onLogout, onShowUserInfo, onShowUpdateUser })
 
                 <NavDropdown.Divider />
 
-                <NavDropdown.Item href="#action/3.4">
+                <NavDropdown.Item onClick={onShowDeleteModal}>
                   Delete Account
                 </NavDropdown.Item>
               </NavDropdown>

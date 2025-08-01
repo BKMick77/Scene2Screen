@@ -12,6 +12,7 @@ import { SignupModal } from '../signup-modal/signup-modal.jsx';
 import { UserInfoModal } from '../user-info-modal/user-info-modal.jsx';
 import { UpdateUser } from '../profile-view/update-user.jsx';
 import { UpdateUserModal } from '../update-user-modal/update-user-modal.jsx';
+import { DeleteAccountModal } from '../delete-account-modal/delete-account-modal.jsx';
 
 export const MainView = () => {
   const [user, setUser] = useState(() => {
@@ -27,6 +28,7 @@ export const MainView = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
   const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleLogin = (user, token) => {
     setUser(user);
@@ -80,6 +82,7 @@ export const MainView = () => {
           }}
           onShowUserInfo={() => setShowUserInfoModal(true)}
           onShowUpdateUser={() => setShowUpdateUserModal(true)}
+          onShowDeleteModal={() => setShowDeleteModal(true)}
         />
 
         <LoginModal
@@ -128,6 +131,17 @@ export const MainView = () => {
           onHide={() => setShowUpdateUserModal(false)}
           user={user}
         />
+
+        <DeleteAccountModal
+          show={showDeleteModal}
+          onHide={() => setShowDeleteModal(false)}
+          onConfirm={() => {
+            setShowDeleteModal(false);
+            handleDelete();
+          }}
+        />
+
+
 
         <Row className='gx-0 justify-content-md-center'>
 
