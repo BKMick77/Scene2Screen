@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavbarView = ({ user, onLogout, onShowUserInfo }) => {
+export const NavbarView = ({ user, onLogout, onShowUserInfo, onShowUpdateUser }) => {
   return (
     <Navbar bg="dark" data-bs-theme="dark" expand="lg" sticky="top" className="px-4">
       <Container fluid className="px-0">
@@ -19,10 +19,13 @@ export const NavbarView = ({ user, onLogout, onShowUserInfo }) => {
                 </NavDropdown.Item>
 
                 <NavDropdown.Item onClick={onShowUserInfo}>
-                  User Info
+                  Your Info
                 </NavDropdown.Item>
 
-                <NavDropdown.Item href="#action/3.3">Update Info</NavDropdown.Item>
+                <NavDropdown.Item onClick={onShowUpdateUser}>
+                  Update Info
+                </NavDropdown.Item>
+
                 <NavDropdown.Divider />
 
                 <NavDropdown.Item href="#action/3.4">

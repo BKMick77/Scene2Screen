@@ -10,6 +10,8 @@ import { ProfileView } from '../profile-view/profile-view.jsx';
 import { LoginModal } from '../../login-modal/login-modal.jsx';
 import { SignupModal } from '../signup-modal/signup-modal.jsx';
 import { UserInfoModal } from '../user-info-modal/user-info-modal.jsx';
+import { UpdateUser } from '../profile-view/update-user.jsx';
+import { UpdateUserModal } from '../update-user-modal/update-user-modal.jsx';
 
 export const MainView = () => {
   const [user, setUser] = useState(() => {
@@ -24,6 +26,7 @@ export const MainView = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
+  const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
 
   const handleLogin = (user, token) => {
     setUser(user);
@@ -76,6 +79,7 @@ export const MainView = () => {
             localStorage.clear();
           }}
           onShowUserInfo={() => setShowUserInfoModal(true)}
+          onShowUpdateUser={() => setShowUpdateUserModal(true)}
         />
 
         <LoginModal
@@ -116,6 +120,12 @@ export const MainView = () => {
         <UserInfoModal
           show={showUserInfoModal}
           onHide={() => setShowUserInfoModal(false)}
+          user={user}
+        />
+
+        <UpdateUserModal
+          show={showUpdateUserModal}
+          onHide={() => setShowUpdateUserModal(false)}
           user={user}
         />
 

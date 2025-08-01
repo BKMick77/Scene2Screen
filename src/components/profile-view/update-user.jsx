@@ -19,7 +19,6 @@ export const UpdateUser = ({
 
   return (
     <div>
-      <h4>Update Info</h4>
       <Form onSubmit={handleSubmit}>
 
         <Form.Group controlId="formUsername" className="mb-3">
