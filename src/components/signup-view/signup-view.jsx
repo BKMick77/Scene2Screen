@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 
 export const SignupView = ({ onLoginClick }) => {
   const [username, setUsername] = useState("");
@@ -39,31 +39,31 @@ export const SignupView = ({ onLoginClick }) => {
     <>
       <Form onSubmit={handleSubmit}>
 
-        <Form.Group controlId="formUsername" className="mb-3">
-          <Form.Label>Username:</Form.Label>
+        <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
           <Form.Control
             type="text"
+            placeholder=" "
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
             minLength="3"
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formPassword" className="mb-3">
-          <Form.Label>Password:</Form.Label>
+        <FloatingLabel controlId="formPassword" label="Password" className="mb-3">
           <Form.Control
             type="password"
+            placeholder=" "
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formConfirmPassword" className="mb-3">
-          <Form.Label>Confirm Password:</Form.Label>
+        <FloatingLabel controlId="formConfirmPassword" label="Confirm Password" className="mb-3">
           <Form.Control
             type="password"
+            placeholder=" "
             value={confirmPassword}
             isInvalid={confirmPassword && confirmPassword !== password}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -72,28 +72,28 @@ export const SignupView = ({ onLoginClick }) => {
           <Form.Control.Feedback type="invalid">
             Passwords do not match
           </Form.Control.Feedback>
-        </Form.Group>
+        </FloatingLabel>
 
 
-        <Form.Group controlId="formEmail" className="mb-3">
-          <Form.Label>Email:</Form.Label>
+        <FloatingLabel controlId="formEmail" label="Email" className="mb-3">
           <Form.Control
             type="email"
+            placeholder=" "
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formBirthday" className="mb-3">
-          <Form.Label>Birthday:</Form.Label>
+        <FloatingLabel controlId="formBirthday" label="Birthday" className="mb-3">
           <Form.Control
             type="date"
+            placeholder=" "
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
         <Button variant="outline-primary" type="submit" className="mt-3">Register</Button>
       </Form>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const LoginView = ({ onLoggedIn, onSignupClick }) => {
@@ -41,30 +41,30 @@ export const LoginView = ({ onLoggedIn, onSignupClick }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formUsername" className="mb-3">
 
-          <Form.Label>Username:</Form.Label>
+        <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
 
           <Form.Control
             type="text"
+            placeholder=" "
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
             minLength="4"
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formPassword" className="mb-3">
+        <FloatingLabel controlId="formPassword" label="Password" className="mb-3">
 
-          <Form.Label>Password:</Form.Label>
 
           <Form.Control
             type="password"
+            placeholder=" "
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
         <Button variant="outline-primary" type="submit" className="mt-3">Login</Button>
       </Form>

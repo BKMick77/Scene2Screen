@@ -1,4 +1,4 @@
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 
 export const UpdateUser = ({
   username,
@@ -21,29 +21,28 @@ export const UpdateUser = ({
     <div>
       <Form onSubmit={handleSubmit}>
 
-        <Form.Group controlId="formUsername" className="mb-3">
-          <Form.Label>Username:</Form.Label>
+        <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
           <Form.Control
             type="text"
+            placeholder=" "
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             minLength="3"
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formCurrentPassword" className="mb-3">
-          <Form.Label>Current Password:</Form.Label>
+        <FloatingLabel controlId="formCurrentPassword" label="Current Password" className="mb-3">
           <Form.Control
             type="password"
+            placeholder=" "
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formNewPassword" className="mb-3">
-          <Form.Label>New Password:</Form.Label>
+        <FloatingLabel controlId="formNewPassword" label="New Password" className="mb-3">
           <Form.Control
             type="password"
             value={newPassword}
@@ -51,12 +50,12 @@ export const UpdateUser = ({
             placeholder="Leave blank to keep current password"
 
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formConfirmPassword" className="mb-3">
-          <Form.Label>Confirm New Password:</Form.Label>
+        <FloatingLabel controlId="formConfirmPassword" label="Confirm New Password" className="mb-3">
           <Form.Control
             type="password"
+            placeholder=" "
             value={confirmPassword}
             isInvalid={confirmPassword && confirmPassword !== newPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -65,28 +64,28 @@ export const UpdateUser = ({
           <Form.Control.Feedback type="invalid">
             Passwords do not match
           </Form.Control.Feedback>
-        </Form.Group>
+        </FloatingLabel>
 
 
-        <Form.Group controlId="formEmail" className="mb-3">
-          <Form.Label>Email:</Form.Label>
+        <FloatingLabel controlId="formEmail" label="Email" className="mb-3">
           <Form.Control
             type="email"
+            placeholder=" "
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
-        <Form.Group controlId="formBirthday" className="mb-3">
-          <Form.Label>Birthday:</Form.Label>
+        <FloatingLabel controlId="formBirthday" label="Birthday" className="mb-3">
           <Form.Control
             type="date"
+            placeholder=" "
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
             required
           />
-        </Form.Group>
+        </FloatingLabel>
 
         <div className="d-flex justify-content-between mt-4">
           <Button variant="outline-primary" type="submit">Update Profile</Button>
