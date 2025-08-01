@@ -90,7 +90,7 @@ export const UpdateUser = ({
 
         <div className="d-flex justify-content-between mt-4">
           <Button variant="outline-primary" type="submit">Update Profile</Button>
-          <Button variant="outline-danger" className="ms-2" onClick={handleDelete}>Delete Account</Button>
+          {/* <Button variant="outline-danger" className="ms-2" onClick={handleDelete}>Delete Account</Button> */}
         </div>
       </Form>
 

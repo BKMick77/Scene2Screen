@@ -91,38 +91,38 @@ export const ProfileView = ({ user, token, setUser, onLogout, movies }) => {
 
   return (
     <>
-      <Row className="gx-4 gy-4">
-        <Col xs={12} lg={3}>
-          <Card className="w-100 h-100">
-            <Card.Body>
-              <UserInfo user={user} />
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col xs={12} lg={9}>
-          <Card className="w-50 h-50">
-            <Card.Body>
-              <UpdateUser
-                username={username}
-                setUsername={setUsername}
-                confirmPassword={confirmPassword}
-                setConfirmPassword={setConfirmPassword}
-                newPassword={newPassword}
-                setNewPassword={setNewPassword}
-                currentPassword={currentPassword}
-                setCurrentPassword={setCurrentPassword}
-                email={email}
-                setEmail={setEmail}
-                birthday={birthday}
-                setBirthday={setBirthday}
-                handleSubmit={handleSubmit}
-                handleDelete={handleDelete}
-              />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      {/* <Row className="gx-4 gy-4"> */}
+      {/*   <Col xs={12} lg={3}> */}
+      {/*     <Card className="w-100 h-100"> */}
+      {/*       <Card.Body> */}
+      {/*         <UserInfo user={user} /> */}
+      {/*       </Card.Body> */}
+      {/*     </Card> */}
+      {/*   </Col> */}
+      {/**/}
+      {/*   <Col xs={12} lg={9}> */}
+      {/*     <Card className="w-50 h-50"> */}
+      {/*       <Card.Body> */}
+      {/*         <UpdateUser */}
+      {/*           username={username} */}
+      {/*           setUsername={setUsername} */}
+      {/*           confirmPassword={confirmPassword} */}
+      {/*           setConfirmPassword={setConfirmPassword} */}
+      {/*           newPassword={newPassword} */}
+      {/*           setNewPassword={setNewPassword} */}
+      {/*           currentPassword={currentPassword} */}
+      {/*           setCurrentPassword={setCurrentPassword} */}
+      {/*           email={email} */}
+      {/*           setEmail={setEmail} */}
+      {/*           birthday={birthday} */}
+      {/*           setBirthday={setBirthday} */}
+      {/*           handleSubmit={handleSubmit} */}
+      {/*           handleDelete={handleDelete} */}
+      {/*         /> */}
+      {/*       </Card.Body> */}
+      {/*     </Card> */}
+      {/*   </Col> */}
+      {/* </Row> */}
 
       <Container className="mt-4 px-4">
         <Row>
