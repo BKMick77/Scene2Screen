@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom"
 
 export const MovieCard = ({ movie }) => {
@@ -10,7 +10,7 @@ export const MovieCard = ({ movie }) => {
 
         <Card.Img variant="top"
           src={movie.ImagePath}
-          style={{ width: "300px", height: "auto", display: "block", marginBottom: "1rem" }} />
+          style={{ width: "100%", height: "auto", display: "block", marginBottom: "1rem" }} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Director?.Name}</Card.Text>
