@@ -1,19 +1,47 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export const NavbarView = ({ user, onHome, onLogout }) => {
+export const NavbarView = ({
+  user,
+  onLogout,
+  onShowUserInfo,
+  onShowUpdateUser,
+  onShowDeleteModal,
+}) => {
+
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand="lg" sticky="top">
-      <Container fluid>
-        <Navbar.Brand href="#">myFlix</Navbar.Brand>
+    <Navbar bg="dark" data-bs-theme="dark" expand="lg" sticky="top" className="px-4">
+      <Container fluid className="px-0">
+        <Navbar.Brand as={Link} to="/" className="brand-text">myFlix</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
-          <Nav className="auto">
-            {user && (
-              <>
-                <Nav.Link onClick={onHome}>Home</Nav.Link>
-                <Nav.Link onClick={onLogout}>Logout</Nav.Link>
-              </>
-            )}
+          <Nav className="me-auto">
+            <>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+
+              <NavDropdown title="Account" id="basic-nav-dropdown">
+
+                <NavDropdown.Item as={Link} to="/profile">
+                  Favorite Movies
+                </NavDropdown.Item>
+
+                <NavDropdown.Item onClick={onShowUserInfo}>
+                  Your Info
+                </NavDropdown.Item>
+
+                <NavDropdown.Item onClick={onShowUpdateUser}>
+                  Update Info
+                </NavDropdown.Item>
+
+                <NavDropdown.Divider />
+
+                <NavDropdown.Item onClick={onShowDeleteModal}>
+                  Delete Account
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <Nav.Link onClick={onLogout}>Logout</Nav.Link>
+            </>
           </Nav>
         </Navbar.Collapse>
       </Container>

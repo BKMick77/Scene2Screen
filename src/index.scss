@@ -4,16 +4,27 @@ $body-color: #ffff;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
-
+//Nav
 .navbar {
-  width: 100vw;
-  margin: 0;
-  left: 0;
-  right: 0;
-  background-color: #000;
-  border-bottom: 2px solid red;
+  border-bottom: 1px solid darkred;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-// * {
-//   outline: 1px solid red;
-// }
+.brand-text {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+//modals
+.modal-content {
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  background: rgba(30, 30, 30, 0.75);
+}
+
+.modal-blur.show {
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+}

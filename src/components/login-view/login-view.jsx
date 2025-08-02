@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, FloatingLabel } from "react-bootstrap";
 
-export const LoginView = ({ onLoggedIn }) => {
+export const LoginView = ({ onLoggedIn, onSignupClick }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,34 +38,47 @@ export const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formUsername">
+    <>
+      <Form onSubmit={handleSubmit}>
 
-        <Form.Label>Username:</Form.Label>
+        <FloatingLabel controlId="formUsername" label="Username" className="mb-3">
 
-        <Form.Control
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          minLength="4"
-        />
-      </Form.Group>
+          <Form.Control
+            type="text"
+            placeholder=" "
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </FloatingLabel>
 
-      <Form.Group controlId="formPassword">
+        <FloatingLabel controlId="formPassword" label="Password" className="mb-3">
 
-        <Form.Label>Password:</Form.Label>
 
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </Form.Group>
+          <Form.Control
+            type="password"
+            placeholder=" "
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </FloatingLabel>
 
-      <Button variant="primary" type="submit">Login</Button>
-    </Form>
+        <Button variant="outline-primary" type="submit" className="mt-3">Login</Button>
+      </Form>
+
+      <div className="mt-3 text-center">
+        <span>Don't have an account?</span>
+        <button
+          type="button"
+          className="btn btn-link p-1 mb-1"
+          onClick={onSignupClick}
+          style={{ textDecoration: "underline" }}
+        >
+          Sign up here
+        </button>
+      </div>
+    </>
   );
 };
 

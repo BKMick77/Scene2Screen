@@ -1,44 +1,57 @@
 import { useState } from "react";
 import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
 
-export const SignupView = ({ onLoginClick }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
+export const UpdateUser = ({ user, token, setUser, onClose }) => {
+  const [username, setUsername] = useState(user.Username);
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [newPassword, setNewPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [email, setEmail] = useState(user.Email);
+  const [birthday, setBirthday] = useState(user.Birthday?.slice(0, 10) || "");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
+    if (newPassword && newPassword !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const updatedData = {
+      username,
+      currentPassword,
+      newPassword,
+      email,
+      birthday
     };
 
-    fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/users", {
-      method: "POST",
-      body: JSON.stringify(data),
+    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedData),
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       }
     }).then((response) => {
       if (response.ok) {
-        alert("Signup successful");
-        window.location.reload();
+        response.json().then((updatedUser) => {
+          alert("Profile updated");
+          setUser(updatedUser);
+          localStorage.setItem("user", JSON.stringify(updatedUser));
+          onClose?.();
+        });
       } else {
-        alert("Signup failed");
+        alert("Update failed");
       }
+    }).catch((err) => {
+      console.error("Update error", err);
+      alert("An error occurred during update");
     });
   };
 
   return (
-    <>
+    <div>
       <Form onSubmit={handleSubmit}>
-
         <Row className="g-3">
           <Col md={6}>
             <FloatingLabel controlId="formUsername" label="Username">
@@ -62,35 +75,44 @@ export const SignupView = ({ onLoginClick }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                pattern="[/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
-                title="Enter a valid email address"
               />
             </FloatingLabel>
           </Col>
 
           <Col md={6}>
-            <FloatingLabel controlId="formPassword" label="Password">
+            <FloatingLabel controlId="formCurrentPassword" label="Current Password">
               <Form.Control
                 type="password"
                 placeholder=" "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
                 required
-                pattern="/^(?=.*[A-Za-z])(?=.*\d|[^A-Za-z\d])[A-Za-z\d\W]{8,}$/"
+              />
+            </FloatingLabel>
+          </Col>
+
+          <Col md={6}>
+            <FloatingLabel controlId="formNewPassword" label="New Password">
+              <Form.Control
+                type="password"
+                placeholder="Leave blank to keep current password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                pattern="^(?=.*[A-Za-z])(?=.*\d|[^A-Za-z\d])[A-Za-z\d\W]{8,}$"
                 title="Password must be at least 8 characters and include a letter and a number or special character."
               />
             </FloatingLabel>
           </Col>
 
           <Col md={6}>
-            <FloatingLabel controlId="formConfirmPassword" label="Confirm Password">
+            <FloatingLabel controlId="formConfirmPassword" label="Confirm New Password">
               <Form.Control
                 type="password"
                 placeholder=" "
                 value={confirmPassword}
-                isInvalid={confirmPassword && confirmPassword !== password}
+                isInvalid={confirmPassword && confirmPassword !== newPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
+                required={!!newPassword}
               />
               <Form.Control.Feedback type="invalid">
                 Passwords do not match
@@ -110,24 +132,11 @@ export const SignupView = ({ onLoginClick }) => {
             </FloatingLabel>
           </Col>
         </Row>
-        <Button variant="outline-primary" type="submit" className="mt-3">Register</Button>
-      </Form>
 
-      <div className="mt-3 text-center">
-        <span>Already have an account?</span>
-        <button
-          type="button"
-          className="btn btn-link p-1 mb-1"
-          onClick={onLoginClick}
-          style={{ textDecoration: "underline" }}
-        >
-          Log in here
-        </button>
-      </div>
-    </>
+        <div className="d-flex justify-content-between mt-4">
+          <Button variant="outline-primary" type="submit">Update Profile</Button>
+        </div>
+      </Form>
+    </div>
   );
 };
-
-
-
-
