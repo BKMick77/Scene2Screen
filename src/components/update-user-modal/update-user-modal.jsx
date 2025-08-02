@@ -5,16 +5,19 @@ export const UpdateUserModal = ({ show, onHide, user, token, setUser }) => {
 
   return (
     <Modal
+      className="modal-blur"
       show={show}
       onHide={onHide}
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Update Info</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <UpdateUser user={user} token={token} setUser={setUser} />
-      </Modal.Body>
+      <div className="modal-content">
+        <Modal.Header closeButton>
+          <Modal.Title>Update Info</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdateUser user={user} token={token} setUser={setUser} />
+        </Modal.Body>
+      </div>
     </Modal>
   );
 };
