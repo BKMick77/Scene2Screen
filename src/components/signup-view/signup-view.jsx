@@ -48,7 +48,8 @@ export const SignupView = ({ onLoginClick }) => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                minLength="3"
+                pattern="^[a-zA-Z0-9_]{3,20}$"
+                title="Username must be 3–20 characters and contain only letters, numbers, or underscores"
               />
             </FloatingLabel>
           </Col>
@@ -61,6 +62,8 @@ export const SignupView = ({ onLoginClick }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                pattern="[/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
+                title="Enter a valid email address"
               />
             </FloatingLabel>
           </Col>
@@ -73,6 +76,8 @@ export const SignupView = ({ onLoginClick }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                pattern="/^(?=.*[A-Za-z])(?=.*\d|[^A-Za-z\d])[A-Za-z\d\W]{8,}$/"
+                title="Password must be at least 8 characters and include a letter and a number or special character."
               />
             </FloatingLabel>
           </Col>
@@ -112,7 +117,7 @@ export const SignupView = ({ onLoginClick }) => {
         <span>Already have an account?</span>
         <button
           type="button"
-          className="btn btn-link p-0"
+          className="btn btn-link p-1 mb-1"
           onClick={onLoginClick}
           style={{ textDecoration: "underline" }}
         >
