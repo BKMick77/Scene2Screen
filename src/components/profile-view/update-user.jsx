@@ -1,26 +1,57 @@
+import { useState } from "react";
 import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
 
-export const UpdateUser = ({
-  username,
-  setUsername,
-  newPassword,
-  setNewPassword,
-  email,
-  setEmail,
-  birthday,
-  setBirthday,
-  handleSubmit,
-  handleDelete,
-  confirmPassword,
-  setConfirmPassword,
-  currentPassword,
-  setCurrentPassword,
-}) => {
+export const UpdateUser = ({ user, token, setUser, onClose }) => {
+  const [username, setUsername] = useState(user.Username);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [email, setEmail] = useState(user.Email);
+  const [birthday, setBirthday] = useState(user.Birthday?.slice(0, 10) || "");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (newPassword && newPassword !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const updatedData = {
+      username,
+      currentPassword,
+      newPassword,
+      email,
+      birthday
+    };
+
+    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedData),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((updatedUser) => {
+          alert("Profile updated");
+          setUser(updatedUser);
+          localStorage.setItem("user", JSON.stringify(updatedUser));
+          onClose?.();
+        });
+      } else {
+        alert("Update failed");
+      }
+    }).catch((err) => {
+      console.error("Update error", err);
+      alert("An error occurred during update");
+    });
+  };
 
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-
         <Row className="g-3">
           <Col md={6}>
             <FloatingLabel controlId="formUsername" label="Username">
@@ -29,8 +60,9 @@ export const UpdateUser = ({
                 placeholder=" "
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                minLength="3"
                 required
+                pattern="^[a-zA-Z0-9_]{3,20}$"
+                title="Username must be 3–20 characters and contain only letters, numbers, or underscores"
               />
             </FloatingLabel>
           </Col>
@@ -66,6 +98,8 @@ export const UpdateUser = ({
                 placeholder="Leave blank to keep current password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
+                pattern="^(?=.*[A-Za-z])(?=.*\d|[^A-Za-z\d])[A-Za-z\d\W]{8,}$"
+                title="Password must be at least 8 characters and include a letter and a number or special character."
               />
             </FloatingLabel>
           </Col>
@@ -101,12 +135,8 @@ export const UpdateUser = ({
 
         <div className="d-flex justify-content-between mt-4">
           <Button variant="outline-primary" type="submit">Update Profile</Button>
-          {/* <Button variant="outline-danger" className="ms-2" onClick={handleDelete}>Delete Account</Button> */}
         </div>
       </Form>
-
     </div>
-
-
   );
 };
