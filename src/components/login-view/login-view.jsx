@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Form, Button, FloatingLabel } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 export const LoginView = ({ onLoggedIn, onSignupClick }) => {
   const [username, setUsername] = useState("");
@@ -50,7 +49,6 @@ export const LoginView = ({ onLoggedIn, onSignupClick }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            minLength="4"
           />
         </FloatingLabel>
 
@@ -73,7 +71,7 @@ export const LoginView = ({ onLoggedIn, onSignupClick }) => {
         <span>Don't have an account?</span>
         <button
           type="button"
-          className="btn btn-link p-0"
+          className="btn btn-link p-1 mb-1"
           onClick={onSignupClick}
           style={{ textDecoration: "underline" }}
         >
