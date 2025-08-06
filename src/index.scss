@@ -6,7 +6,7 @@ $body-color: #ffff;
 
 //Nav
 .navbar {
-  border-bottom: 1px solid darkred;
+  border-bottom: 0.1px solid darkred;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -20,11 +20,89 @@ $body-color: #ffff;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  background: rgba(30, 30, 30, 0.75);
+  backdrop-filter: blur(15px);
+  background: rgba(26, 27, 39, 0.55);
+}
+
+.modal-content .btn-close {
+  filter: invert(1);
 }
 
 .modal-blur.show {
   background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(6px);
+}
+
+.modal-header,
+.modal-footer {
+  padding: 1rem 1rem;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+//review-drawer
+.offcanvas-bottom.custom-height {
+  height: 45dvh;
+}
+
+.custom-offcanvas {
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  background: rgba(26, 27, 39, 0.75);
+}
+
+.custom-offcanvas .btn-close {
+  filter: invert(1);
+}
+
+.login-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('./assets/movie-card-bg.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//trash button favorits 
+.trash-button {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.trash-button:hover {
+  color: darkred;
+}
+
+//card shadow
+.cards {
+  transition: box-shadow 0.2s ease;
+}
+
+.cards:hover {
+  box-shadow: 0 9px 12px rgba(0, 0, 0, 0.35);
+  filter: brightness(1.04);
+}
+
+.fav-cards:hover {
+  filter: brightness(1.08);
+}
+
+//movie-view icons scale
+.movie-icon .heart-icon {
+  transition: transform 0.2s ease;
+}
+
+.movie-icon:hover {
+  transform: scale(1.08)
+}
+
+.heart-icon:hover {
+  transform: scale(1.1)
 }
