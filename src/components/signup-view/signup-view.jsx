@@ -62,7 +62,6 @@ export const SignupView = ({ onLoginClick }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                pattern="[/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
                 title="Enter a valid email address"
               />
             </FloatingLabel>
@@ -76,7 +75,7 @@ export const SignupView = ({ onLoginClick }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                pattern="/^(?=.*[A-Za-z])(?=.*\d|[^A-Za-z\d])[A-Za-z\d\W]{8,}$/"
+                pattern="^(?=.*[A-Za-z])(?=.*[0-9\W]).{8,}$"
                 title="Password must be at least 8 characters and include a letter and a number or special character."
               />
             </FloatingLabel>

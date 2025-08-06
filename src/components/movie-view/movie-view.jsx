@@ -1,15 +1,13 @@
 import { useParams } from "react-router";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { SiAppletv, SiPrimevideo } from "react-icons/si";
+import ReviewDrawer from "../review-drawer/review-drawer";
 
 export const MovieView = ({ movies, user, token, setUser }) => {
   const { movieId } = useParams();
-
-  console.log("movieId from URL:", movieId);
-  console.log("movies from props:", movies);
-  console.log("movie._id values:", movies.map((m) => m._id));
 
   const movie = movies.find((m) => m._id === movieId);
 
@@ -18,6 +16,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
   const handleToggleFavorites = () => {
     const method = isFavorite ? "DELETE" : "POST";
     const url = `https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}/movies/${movie._id}`;
+
 
     fetch(url, {
       method,
@@ -52,6 +51,11 @@ export const MovieView = ({ movies, user, token, setUser }) => {
     return <div>Movie not found</div>;
   }
 
+  const [showReviews, setShowReviews] = useState(false);
+
+  const handleOpenReviews = () => setShowReviews(true);
+  const handleCloseReviews = () => setShowReviews(false);
+
   return (
     <div
       className="movie-view"
@@ -60,7 +64,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        minHeight: '100dvh',
+        minHeight: '100vh',
         width: '100%',
         margin: 0,
         padding: 0,
@@ -84,14 +88,45 @@ export const MovieView = ({ movies, user, token, setUser }) => {
 
         }}
       >
-        <h1 className="mb-3">{movie.Title}</h1>
+        <h1 className="mb-3">{movie?.Title}</h1>
 
-        <h3 className="mb-3" style={{ maxWidth: '30ch' }}> {movie.Description}</h3>
-        <h4 className="mb-3"><strong>Director:</strong> {movie.Director?.Name}</h4>
+        <h3 className="mb-3" style={{ maxWidth: '30ch' }}> {movie?.Description}</h3>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <h4 style={{ margin: 0 }}>{movie.Genre?.Name}</h4>
+          <h5 className="text-muted">Director</h5> <h5>{movie.Director?.Name}</h5>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h5 className="text-muted" style={{ margin: 0 }}>{movie.Genre?.Name}</h5>
+          <span className="fs-5 ml-3 text-muted">•</span>
+          <h5 className="text-muted" style={{ margin: 0 }}>{movie?.ReleaseYear}</h5>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {movie.RottonTomatoes[0]?.Link && (
+            <a
+              href={movie.RottonTomatoes[0]?.Link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: 'inherit',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <img
+                src="https://images.fandango.com/cms/assets/ae686540-7fff-11ef-8321-2b978811c524--certified-fresh-notext.svg"
+                style={{ width: 28, height: 28 }}
+                className="movie-icon"
+              />
+              <h5 className="text-muted mb-0">{movie.RottonTomatoes[0]?.Score}</h5>
+            </a>
+          )}
+
           <Button
+            className="heart-icon"
             variant="light"
             onClick={handleToggleFavorites}
             style={{
@@ -101,12 +136,13 @@ export const MovieView = ({ movies, user, token, setUser }) => {
               color: isFavorite ? 'red' : 'red',
               padding: '5px',
               lineHeight: 1,
-              marginLeft: '10px',
+              marginLeft: '1.25rem'
             }}
           >
             {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
           </Button>
         </div>
+
 
         {movie.WatchLinks && (
           <div className="mt-4">
@@ -119,12 +155,12 @@ export const MovieView = ({ movies, user, token, setUser }) => {
                 rel="noopener noreferrer"
                 style={{
                   color: 'inherit',
-                  textDecoration: 'none', // optional, removes underline
-                  display: 'inline-block', // keeps it tight around the icon
-                  marginRight: '1rem' // spacing if placing next to others
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  marginRight: '2rem'
                 }}
               >
-                <SiAppletv size={60} />
+                <SiAppletv className="movie-icon" size={60} />
               </a>
             )}
 
@@ -139,14 +175,16 @@ export const MovieView = ({ movies, user, token, setUser }) => {
                   display: 'inline-block',
                 }}
               >
-                <SiPrimevideo size={80} />
+                <SiPrimevideo className="movie-icon" size={80} />
               </a>
             )}
           </div>
         )}
         <Link to="/">
-          <Button variant="primary-secondary"
+          <Button variant="outline-secondary"
             style={{
+              color: "#fff",
+              borderColor: '#fff',
               position: 'fixed',
               bottom: '20px',
               left: '20px',
@@ -156,6 +194,25 @@ export const MovieView = ({ movies, user, token, setUser }) => {
           </Button>
         </Link>
 
+        <Button
+          onClick={handleOpenReviews}
+          variant="outline-secondary"
+          style={{
+            color: "#fff",
+            borderColor: '#fff',
+            position: 'fixed',
+            bottom: '20px',
+            left: '100px',
+            zIndex: 10,
+          }}>
+          See Reviews
+        </Button>
+
+        <ReviewDrawer
+          show={showReviews}
+          handleClose={handleCloseReviews}
+          movie={movie}
+        />
       </div>
     </div>
   );

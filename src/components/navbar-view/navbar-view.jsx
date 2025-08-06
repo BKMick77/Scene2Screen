@@ -1,8 +1,7 @@
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown, Form, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavbarView = ({
-  user,
   onLogout,
   onShowUserInfo,
   onShowUpdateUser,
@@ -10,7 +9,9 @@ export const NavbarView = ({
 }) => {
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand="lg" sticky="top" className="px-4">
+    <Navbar data-bs-theme="dark" expand="lg" sticky="top" className="px-4"
+      style={{ backgroundColor: "#16161F" }}
+    >
       <Container fluid className="px-0">
         <Navbar.Brand as={Link} to="/" className="brand-text">myFlix</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
@@ -43,6 +44,13 @@ export const NavbarView = ({
               <Nav.Link onClick={onLogout}>Logout</Nav.Link>
             </>
           </Nav>
+          <Form className="d-flex ms-auto">
+            <Form.Control
+              type="text"
+              placeholder="Search (placeholder)"
+              className="me-2"
+            />
+          </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>

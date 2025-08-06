@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { MovieCard } from "../movie-card/movie-card.jsx";
 import { MovieView } from "../movie-view/movie-view.jsx";
 import { NavbarView } from "../navbar-view/navbar-view.jsx"
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from '../profile-view/profile-view.jsx';
 import { LoginModal } from '../login-modal/login-modal.jsx';
@@ -57,6 +57,9 @@ export const MainView = () => {
   }, [token]);
 
   const handleDelete = () => {
+    const confirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    if (!confirmed) return;
+
     fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` }
@@ -104,7 +107,6 @@ export const MainView = () => {
           show={showLoginModal}
           onHide={() => setShowLoginModal(false)}
           onSignupClick={() => {
-            console.log("Signup click fired");
             setShowLoginModal(false);
             setShowSignupModal(true);
           }}
@@ -121,7 +123,6 @@ export const MainView = () => {
           show={showSignupModal}
           onHide={() => setShowSignupModal(false)}
           onLoginClick={() => {
-            console.log("Login click fired");
             setShowSignupModal(false);
             setShowLoginModal(true);
           }}
@@ -144,6 +145,8 @@ export const MainView = () => {
           show={showUpdateUserModal}
           onHide={() => setShowUpdateUserModal(false)}
           user={user}
+          token={token}
+          setUser={setUser}
         />
 
         <DeleteAccountModal
@@ -161,7 +164,13 @@ export const MainView = () => {
 
           <Route
             path="/login"
-            element={user ? <Navigate to="/" /> : null}
+            element={
+              user ? (
+                <Navigate to="/" />
+              ) : (
+                <div className="login-bg">               </div>
+              )
+            }
           />
 
           <Route
