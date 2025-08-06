@@ -9,7 +9,7 @@
   - Director
   - Genre
   - Release Year
-  - Rotten Tomatoes score + streaming links (Apple TV, Amazon, etc.)
+  - Rotten Tomatoes score + streaming links (Apple TV & Amazon)
 - Add or remove favorite movies
 - View and update user profile information
 - Delete user account
