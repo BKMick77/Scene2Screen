@@ -106,3 +106,16 @@ $body-color: #ffff;
 .heart-icon:hover {
   transform: scale(1.1)
 }
+
+//director name movie-view
+.director-name {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.director-name:hover {
+  text-decoration: underline;
+  color: #E5E6E6;
+  opacity: 0.7;
+
+}
