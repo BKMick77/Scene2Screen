@@ -13,7 +13,7 @@ export const SignupModal = ({ show, onHide, onLoginClick }) => (
 
     <div className="modal-content">
       <Modal.Header>
-        <Modal.Title>Sign Up</Modal.Title>
+        <Modal.Title><strong className="fs-3 me-2">myFlix</strong>Sign Up</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <SignupView onLoginClick={onLoginClick} />
