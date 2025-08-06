@@ -89,6 +89,7 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 required
+                autoFocus
               />
             </FloatingLabel>
           </Col>
