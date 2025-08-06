@@ -49,6 +49,7 @@ export const LoginView = ({ onLoggedIn, onSignupClick }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            autoFocus
           />
         </FloatingLabel>
 
