@@ -42,7 +42,7 @@
 
 ---
 
- <img src="public/assets/movie-view-parasite.png" width="50%" />
- <img src="public/assets/movie-view-twbb.png" width="50%" />
- <img src="public/assets/movie-card.png" width="50%" />
- <img src="public/assets/update-user.png" width="50%" />
+ <img src="public/assets/movie-view-parasite.png" width="75%" />
+ <img src="public/assets/movie-view-twbb.png" width="75%" />
+ <img src="public/assets/movie-card.png" width="75%" />
+ <img src="public/assets/update-user.png" width="75%" />
