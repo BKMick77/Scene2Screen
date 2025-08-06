@@ -13,7 +13,7 @@ export const NavbarView = ({
       style={{ backgroundColor: "#16161F" }}
     >
       <Container fluid className="px-0">
-        <Navbar.Brand as={Link} to="/" className="brand-text">myFlix</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="brand-text s2s-logo">S2S</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
           <Nav className="me-auto">

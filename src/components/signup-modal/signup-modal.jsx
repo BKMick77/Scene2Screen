@@ -13,7 +13,10 @@ export const SignupModal = ({ show, onHide, onLoginClick }) => (
 
     <div className="modal-content">
       <Modal.Header>
-        <Modal.Title><strong className="fs-3 me-2">myFlix</strong>Sign Up</Modal.Title>
+        <Modal.Title style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <div className="s2s-logo">S2S</div>
+          <p className="mt-4">Sign Up</p>
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <SignupView onLoginClick={onLoginClick} />

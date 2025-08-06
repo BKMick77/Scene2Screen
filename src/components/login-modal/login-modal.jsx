@@ -23,7 +23,11 @@ export const LoginModal = ({ show, onHide, onLoggedIn, onSignupClick }) => {
 
       <div className="modal-content">
         <Modal.Header>
-          <Modal.Title><strong className="fs-3 me-2">myFlix</strong>Log In</Modal.Title>
+          <Modal.Title style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <div className="s2s-logo">S2S</div>
+            <p className="mt-4">Login</p>
+          </Modal.Title>
+
         </Modal.Header>
         <Modal.Body>
           <LoginView
