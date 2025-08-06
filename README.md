@@ -9,7 +9,7 @@
   - Director
   - Genre
   - Release Year
-  - Rotten Tomatoes score + streaming links (Apple TV & Amazon)
+  - Rotten Tomatoes score and streaming links (Apple TV & Amazon)
 - Add or remove favorite movies
 - View and update user profile information
 - Delete user account
@@ -19,16 +19,16 @@
 - React (frontend)
 - React Bootstrap
 - Express.js (backend)
-- MongoDB + Mongoose
-- JSON Web Token (JWT) Auth
+- MongoDB & Mongoose
+- JWT Auth
 - Passport.js
 - Heroku
 - Git / GitHub
 
 ## Future Developments
 
-- Search bar with instant movie filtering
-- User-submitted reviews
+- Search bar with movie filtering
+- User submitted reviews
 - Genre and director pages
 
 ## Learning Experience
