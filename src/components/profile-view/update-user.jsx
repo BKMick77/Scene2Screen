@@ -25,6 +25,8 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
       birthday
     };
 
+    console.log('Submitting update with token:', token);
+
     fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
       method: "PUT",
       body: JSON.stringify(updatedData),
@@ -98,7 +100,7 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
                 placeholder="Leave blank to keep current password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                pattern="^(?=.*[A-Za-z])(?=.*\d|[^A-Za-z\d])[A-Za-z\d\W]{8,}$"
+                pattern="^(?=.*[A-Za-z])(?=.*[\d\W]).{8,}$"
                 title="Password must be at least 8 characters and include a letter and a number or special character."
               />
             </FloatingLabel>
@@ -134,7 +136,7 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
         </Row>
 
         <div className="d-flex justify-content-between mt-4">
-          <Button variant="outline-primary" type="submit">Update Profile</Button>
+          <Button variant="outline-primary" type="submit">Update</Button>
         </div>
       </Form>
     </div>
