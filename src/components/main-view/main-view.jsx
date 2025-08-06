@@ -10,6 +10,7 @@ import { SignupModal } from '../signup-modal/signup-modal.jsx';
 import { UserInfoModal } from '../user-info-modal/user-info-modal.jsx';
 import { UpdateUserModal } from '../update-user-modal/update-user-modal.jsx';
 import { DeleteAccountModal } from '../delete-account-modal/delete-account-modal.jsx';
+import { DirectorModal } from "../director-modal/director-modal.jsx"
 
 export const MainView = () => {
   const [user, setUser] = useState(() => {
@@ -25,6 +26,7 @@ export const MainView = () => {
   const [showUserInfoModal, setShowUserInfoModal] = useState(false);
   const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDirectorModal, setShowDirectorModal] = useState(false);
 
   const handleLogin = (user, token) => {
     setUser(user);
@@ -158,6 +160,13 @@ export const MainView = () => {
           }}
         />
 
+        <DirectorModal
+          show={showDirectorModal}
+          onHide={() => setShowDirectorModal(false)}
+        />
+
+
+
 
 
         <Routes>
@@ -168,7 +177,7 @@ export const MainView = () => {
               user ? (
                 <Navigate to="/" />
               ) : (
-                <div className="login-bg">               </div>
+                <div className="login-bg"></div>
               )
             }
           />
@@ -215,6 +224,7 @@ export const MainView = () => {
                       user={user}
                       token={token}
                       setUser={setUser}
+                      onShowDirectorModal={() => setShowDirectorModal(true)}
                     />
                   </Col>
                 )}
