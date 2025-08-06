@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { SiAppletv, SiPrimevideo } from "react-icons/si";
 import ReviewDrawer from "../review-drawer/review-drawer";
+import { DirectorModal } from "../director-modal/director-modal";
 
 export const MovieView = ({ movies, user, token, setUser }) => {
   const { movieId } = useParams();
@@ -56,6 +57,9 @@ export const MovieView = ({ movies, user, token, setUser }) => {
   const handleOpenReviews = () => setShowReviews(true);
   const handleCloseReviews = () => setShowReviews(false);
 
+  const [showDirectorModal, setShowDirectorModal] = useState(false);
+  const handleOpenDirectorModal = () => setShowDirectorModal(true);
+  //
   return (
     <div
       className="movie-view"
@@ -93,7 +97,20 @@ export const MovieView = ({ movies, user, token, setUser }) => {
         <h3 className="mb-3" style={{ maxWidth: '30ch' }}> {movie?.Description}</h3>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <h5 className="text-muted">Director</h5> <h5>{movie.Director?.Name}</h5>
+          <h5 className="text-muted">Director</h5>
+
+          <h5
+            className="director-name"
+            onClick={() => setShowDirectorModal(true)}
+          >
+            {movie.Director?.Name}
+          </h5>
+          <DirectorModal
+            show={showDirectorModal}
+            onHide={() => setShowDirectorModal(false)}
+            director={movie.Director}
+          />
+
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
