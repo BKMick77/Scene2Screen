@@ -21,7 +21,8 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
   };
 
   return (
-    <Container className="mt-4 px-4">
+    <Container>
+      {/* className="mt-4 px-4"> */}
       <Row>
         <Col>
           <FavoriteMovies
