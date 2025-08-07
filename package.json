@@ -18,6 +18,7 @@
   "homepage": "https://github.com/BKMick77/myFlix-client#readme",
   "dependencies": {
     "bootstrap": "^5.3.7",
+    "fuse.js": "^7.1.0",
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
