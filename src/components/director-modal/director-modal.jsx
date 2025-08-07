@@ -10,7 +10,7 @@ export const DirectorModal = ({ show, onHide, director }) => {
       centered
     >
       <div className="modal-content">
-        <Modal.Header closeButton>
+        <Modal.Header>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', width: '75%' }}>
             {director?.Image && (
               <img
