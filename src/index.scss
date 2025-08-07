@@ -72,12 +72,20 @@ $body-color: #ffff;
 
 //trash button favorits 
 .trash-button {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 40%;
   transition: all 0.2s ease;
   cursor: pointer;
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
 }
 
 .trash-button:hover {
   color: darkred;
+  transform: scale(1.1);
 }
 
 //card shadow

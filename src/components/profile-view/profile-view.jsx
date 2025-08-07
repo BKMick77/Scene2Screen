@@ -21,17 +21,11 @@ export const ProfileView = ({ user, token, setUser, movies }) => {
   };
 
   return (
-    <Container>
-      {/* className="mt-4 px-4"> */}
-      <Row>
-        <Col>
-          <FavoriteMovies
-            user={user}
-            movies={movies}
-            handleRemoveFavorite={handleRemoveFavorite}
-          />
-        </Col>
-      </Row>
-    </Container>
+
+    <FavoriteMovies
+      user={user}
+      movies={movies}
+      handleRemoveFavorite={handleRemoveFavorite}
+    />
   );
 };
