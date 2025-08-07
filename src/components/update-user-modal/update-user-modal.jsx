@@ -12,7 +12,10 @@ export const UpdateUserModal = ({ show, onHide, user, token, setUser }) => {
     >
       <div className="modal-content">
         <Modal.Header closeButton>
-          <Modal.Title>Update Info</Modal.Title>
+          <Modal.Title style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <div className="s2s-logo">S2S</div>
+            <p className="mt-4">Update Info</p>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <UpdateUser user={user} token={token} setUser={setUser} />
