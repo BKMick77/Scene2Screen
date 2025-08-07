@@ -4,7 +4,7 @@
 
 ## App Features
 
-- Full-stack movie database application with user authentication
+- Full stack movie database application with user authentication
 - Browse movies with details:
   - Title
   - Description
