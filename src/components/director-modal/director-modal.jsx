@@ -31,7 +31,8 @@ export const DirectorModal = ({ show, onHide, director }) => {
               <p className="fs-5 text-muted mb-0">(b. {director?.Birth})</p>
             </div>
           </div>
-        </Modal.Header>        <Modal.Body className="fs-5">
+        </Modal.Header>
+        <Modal.Body className="fs-5">
           <p style={{ whiteSpace: 'pre-line', lineHeight: '1.6' }}>
             {director?.Bio}
           </p>
