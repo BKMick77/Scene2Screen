@@ -1,4 +1,6 @@
-# myFlix Movie App
+# Scene2Screen (S2S)
+
+## Check out the live app [Scene2Screen](https://scene2screen.dev/)
 
 ## App Features
 
@@ -22,7 +24,7 @@
 - MongoDB & Mongoose
 - JWT Auth
 - Passport.js
-- Heroku
+- Heroku / Netifly
 - Git / GitHub
 
 ## Future Developments
