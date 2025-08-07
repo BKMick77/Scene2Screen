@@ -10,8 +10,8 @@ export const DirectorModal = ({ show, onHide, director }) => {
       centered
     >
       <div className="modal-content">
-        <Modal.Header>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', width: '75%' }}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', width: '75%', marginTop: '10px' }}>
             {director?.Image && (
               <img
                 src={director.Image}
@@ -30,7 +30,7 @@ export const DirectorModal = ({ show, onHide, director }) => {
               <h2 className="fs-2 mb-1">{director?.Name}</h2>
               <p className="fs-5 text-muted mb-0">(b. {director?.Birth})</p>
             </div>
-          </div>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="fs-5">
           <p style={{ whiteSpace: 'pre-line', lineHeight: '1.6' }}>
