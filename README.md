@@ -31,7 +31,6 @@
 
 - Search bar with movie filtering
 - User submitted reviews
-- Genre and director pages
 
 ## Learning Experience
 
