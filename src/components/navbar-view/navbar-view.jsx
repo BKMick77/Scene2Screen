@@ -56,7 +56,7 @@ export const NavbarView = ({
         <Navbar.Brand as={Link} to="/" className="brand-text s2s-logo">S2S</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
-          <Nav className="me-auto">:
+          <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
 
             <NavDropdown title="Account" id="basic-nav-dropdown">
