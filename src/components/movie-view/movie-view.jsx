@@ -90,6 +90,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
           position: 'fixed',
           zIndex: 10,
 
+
         }}
       >
         <h1 className="mb-3">{movie?.Title}</h1>
