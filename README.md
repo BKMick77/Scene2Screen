@@ -37,8 +37,8 @@
 - Built a full-stack MERN app from scratch
 - Worked with protected API routes using JWT and Passport
 - Managed user authentication and persisted sessions with localStorage
-- Designed dynamic UI layouts with React Bootstrap
-- Learned to split large components into smaller modular ones
+- Designed UI layouts with React Bootstrap
+- Split large components into smaller modular ones
 - Built and deployed RESTful API with custom endpoints
 
 ---
