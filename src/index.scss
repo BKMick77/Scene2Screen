@@ -79,17 +79,18 @@ $body-color: #ffff;
   align-items: center;
 }
 
-//trash button favorits 
+//trash icon fav-view
 .trash-button {
   color: #fff;
   background: rgba(0, 0, 0, 0.2);
-  padding: 4px;
+  padding: 2px;
   border-radius: 40%;
   transition: all 0.2s ease;
   cursor: pointer;
   position: absolute;
   bottom: 3px;
   left: 3px;
+  z-index: 10;
 }
 
 .trash-button:hover {
@@ -142,6 +143,7 @@ $body-color: #ffff;
 .s2s-logo {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.75rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.1em;
   padding: 0.5rem 1rem;
   border: 0.5px solid #DDDEDE;

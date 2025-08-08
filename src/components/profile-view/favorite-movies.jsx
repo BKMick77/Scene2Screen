@@ -39,6 +39,7 @@ export const FavoriteMovies = ({ user, movies, handleRemoveFavorite }) => {
                 </Link>
                 <FaRegTrashAlt
                   className="trash-button"
+                  style={{ zIndex: 10 }}
                   size={30}
                   onClick={() => handleRemoveFavorite(movie._id)}
                 />
