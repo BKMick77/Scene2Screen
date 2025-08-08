@@ -103,6 +103,7 @@ export const MainView = () => {
           onShowUserInfo={() => setShowUserInfoModal(true)}
           onShowUpdateUser={() => setShowUpdateUserModal(true)}
           onShowDeleteModal={() => setShowDeleteModal(true)}
+          movies={movies}
         />
 
         <LoginModal
