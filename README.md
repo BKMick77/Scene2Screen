@@ -29,8 +29,8 @@
 
 ## Future Developments
 
-- Search bar with movie filtering
 - User submitted reviews
+- User sorting of movies
 
 ## Learning Experience
 
