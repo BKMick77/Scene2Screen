@@ -1,17 +1,19 @@
-import { Modal } from "react-bootstrap";
+import { Modal } from 'react-bootstrap';
 
 export const DirectorModal = ({ show, onHide, director }) => {
-
   return (
-    <Modal
-      className="modal-blur"
-      show={show}
-      onHide={onHide}
-      centered
-    >
+    <Modal className="modal-blur" show={show} onHide={onHide} centered>
       <div className="modal-content">
         <Modal.Header closeButton>
-          <Modal.Title style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', width: '75%', marginTop: '10px' }}>
+          <Modal.Title
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1.25rem',
+              width: '75%',
+              marginTop: '10px',
+            }}
+          >
             {director?.Image && (
               <img
                 src={director.Image}
@@ -22,7 +24,7 @@ export const DirectorModal = ({ show, onHide, director }) => {
                   borderRadius: '50%',
                   objectFit: 'cover',
                   objectPosition: 'center 7%',
-                  flexShrink: 0.5
+                  flexShrink: 0.5,
                 }}
               />
             )}

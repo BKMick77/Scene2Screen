@@ -1,11 +1,11 @@
-import { useParams } from "react-router";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { SiAppletv, SiPrimevideo } from "react-icons/si";
-import ReviewDrawer from "../review-drawer/review-drawer";
-import { DirectorModal } from "../director-modal/director-modal";
+import { useParams } from 'react-router';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { SiAppletv, SiPrimevideo } from 'react-icons/si';
+import ReviewDrawer from '../review-drawer/review-drawer';
+import { DirectorModal } from '../director-modal/director-modal';
 
 export const MovieView = ({ movies, user, token, setUser }) => {
   const { movieId } = useParams();
@@ -15,37 +15,38 @@ export const MovieView = ({ movies, user, token, setUser }) => {
   const isFavorite = user?.FavoriteMovies?.includes(movie._id);
 
   const handleToggleFavorites = () => {
-    const method = isFavorite ? "DELETE" : "POST";
+    const method = isFavorite ? 'DELETE' : 'POST';
     const url = `https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}/movies/${movie._id}`;
-
 
     fetch(url, {
       method,
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-      }
+        'Content-Type': 'application/json',
+      },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Favorite toggle failed");
+        if (!res.ok) throw new Error('Favorite toggle failed');
 
-
-        return fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
+        return fetch(
+          `https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        });
+        );
       })
       .then((res) => {
-        if (!res.ok) throw new Error("User fetch failed");
+        if (!res.ok) throw new Error('User fetch failed');
         return res.json();
       })
       .then((updatedUser) => {
         setUser(updatedUser);
-        localStorage.setItem("user", JSON.stringify(updatedUser));
+        localStorage.setItem('user', JSON.stringify(updatedUser));
       })
       .catch((err) => {
-        console.error("toggle error", err);
+        console.error('toggle error', err);
       });
   };
   if (!movie) {
@@ -76,7 +77,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        overflow: 'hidden'
+        overflow: 'hidden',
       }}
     >
       <div
@@ -89,13 +90,14 @@ export const MovieView = ({ movies, user, token, setUser }) => {
           margin: '25px 0 0 25px',
           position: 'fixed',
           zIndex: 10,
-
-
         }}
       >
         <h1 className="mb-3">{movie?.Title}</h1>
 
-        <h3 className="mb-3" style={{ maxWidth: '30ch' }}> {movie?.Description}</h3>
+        <h3 className="mb-3" style={{ maxWidth: '30ch' }}>
+          {' '}
+          {movie?.Description}
+        </h3>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <h5 className="text-muted">Director</h5>
@@ -111,13 +113,16 @@ export const MovieView = ({ movies, user, token, setUser }) => {
             onHide={() => setShowDirectorModal(false)}
             director={movie.Director}
           />
-
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <h5 className="text-muted" style={{ margin: 0 }}>{movie.Genre?.Name}</h5>
+          <h5 className="text-muted" style={{ margin: 0 }}>
+            {movie.Genre?.Name}
+          </h5>
           <span className="fs-5 ml-3 text-muted">•</span>
-          <h5 className="text-muted" style={{ margin: 0 }}>{movie?.ReleaseYear}</h5>
+          <h5 className="text-muted" style={{ margin: 0 }}>
+            {movie?.ReleaseYear}
+          </h5>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -139,7 +144,9 @@ export const MovieView = ({ movies, user, token, setUser }) => {
                 style={{ width: 28, height: 28 }}
                 className="movie-icon"
               />
-              <h5 className="text-muted mb-0">{movie.RottonTomatoes[0]?.Score}</h5>
+              <h5 className="text-muted mb-0">
+                {movie.RottonTomatoes[0]?.Score}
+              </h5>
             </a>
           )}
 
@@ -154,13 +161,12 @@ export const MovieView = ({ movies, user, token, setUser }) => {
               color: isFavorite ? 'red' : 'red',
               padding: '5px',
               lineHeight: 1,
-              marginLeft: '1.25rem'
+              marginLeft: '1.25rem',
             }}
           >
             {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
           </Button>
         </div>
-
 
         {movie.WatchLinks && (
           <div className="mt-4">
@@ -175,7 +181,7 @@ export const MovieView = ({ movies, user, token, setUser }) => {
                   color: 'inherit',
                   textDecoration: 'none',
                   display: 'inline-block',
-                  marginRight: '2rem'
+                  marginRight: '2rem',
                 }}
               >
                 <SiAppletv className="movie-icon" size={60} />
@@ -199,15 +205,17 @@ export const MovieView = ({ movies, user, token, setUser }) => {
           </div>
         )}
         <Link to="/">
-          <Button variant="outline-secondary"
+          <Button
+            variant="outline-secondary"
             style={{
-              color: "#fff",
+              color: '#fff',
               borderColor: '#fff',
               position: 'fixed',
               bottom: '20px',
               left: '20px',
               zIndex: 10,
-            }}>
+            }}
+          >
             Back
           </Button>
         </Link>
@@ -216,13 +224,14 @@ export const MovieView = ({ movies, user, token, setUser }) => {
           onClick={handleOpenReviews}
           variant="outline-secondary"
           style={{
-            color: "#fff",
+            color: '#fff',
             borderColor: '#fff',
             position: 'fixed',
             bottom: '20px',
             left: '100px',
             zIndex: 10,
-          }}>
+          }}
+        >
           See Reviews
         </Button>
 

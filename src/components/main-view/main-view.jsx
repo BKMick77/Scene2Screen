@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import { MovieCard } from "../movie-card/movie-card.jsx";
-import { MovieView } from "../movie-view/movie-view.jsx";
-import { NavbarView } from "../navbar-view/navbar-view.jsx"
-import { Row, Col, Container } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { MovieCard } from '../movie-card/movie-card.jsx';
+import { MovieView } from '../movie-view/movie-view.jsx';
+import { NavbarView } from '../navbar-view/navbar-view.jsx';
+import { Row, Col, Container } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProfileView } from '../profile-view/profile-view.jsx';
 import { LoginModal } from '../login-modal/login-modal.jsx';
 import { SignupModal } from '../signup-modal/signup-modal.jsx';
 import { UserInfoModal } from '../user-info-modal/user-info-modal.jsx';
 import { UpdateUserModal } from '../update-user-modal/update-user-modal.jsx';
 import { DeleteAccountModal } from '../delete-account-modal/delete-account-modal.jsx';
-import { DirectorModal } from "../director-modal/director-modal.jsx"
+import { DirectorModal } from '../director-modal/director-modal.jsx';
 
 export const MainView = () => {
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem('user');
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
-  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -31,8 +31,8 @@ export const MainView = () => {
   const handleLogin = (user, token) => {
     setUser(user);
     setToken(token);
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("token", token);
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
   };
 
   useEffect(() => {
@@ -42,41 +42,45 @@ export const MainView = () => {
 
     setIsLoading(true);
 
-    fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` }
+    fetch('https://young-tor-59565-22774666cdbf.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((moviesFromApi) => {
-        console.log("Fetched Movies:", moviesFromApi);
+        console.log('Fetched Movies:', moviesFromApi);
         setMovies(moviesFromApi);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.error("Fetch error:", err);
+        console.error('Fetch error:', err);
         setIsLoading(false);
       });
-
   }, [token]);
 
   const handleDelete = () => {
-    const confirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+    const confirmed = window.confirm(
+      'Are you sure you want to delete your account? This action cannot be undone.'
+    );
     if (!confirmed) return;
 
-    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` }
-    })
+    fetch(
+      `https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((response) => {
         if (response.ok) {
-          console.log("Account deleted");
+          console.log('Account deleted');
           setUser(null);
           setToken(null);
           localStorage.clear();
         } else {
-          console.error("Failed to delete account");
+          console.error('Failed to delete account');
         }
       })
-      .catch((error) => console.error("Delete error:", error));
+      .catch((error) => console.error('Delete error:', error));
   };
 
   useEffect(() => {
@@ -87,12 +91,9 @@ export const MainView = () => {
     }
   }, [user]);
 
-
-
   return (
     <>
       <BrowserRouter>
-
         <NavbarView
           user={user}
           onLogout={() => {
@@ -116,8 +117,8 @@ export const MainView = () => {
           onLoggedIn={(user, token) => {
             setUser(user);
             setToken(token);
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("token", token);
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', token);
             setShowLoginModal(false);
           }}
         />
@@ -132,8 +133,8 @@ export const MainView = () => {
           onSignedUp={(user, token) => {
             setUser(user);
             setToken(token);
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("token", token);
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('token', token);
             setShowSignupModal(false);
           }}
         />
@@ -166,27 +167,15 @@ export const MainView = () => {
           onHide={() => setShowDirectorModal(false)}
         />
 
-
-
-
-
         <Routes>
-
           <Route
             path="/login"
             element={
-              user ? (
-                <Navigate to="/" />
-              ) : (
-                <div className="login-bg"></div>
-              )
+              user ? <Navigate to="/" /> : <div className="login-bg"></div>
             }
           />
 
-          <Route
-            path="/signup"
-            element={user ? <Navigate to="/" /> : null}
-          />
+          <Route path="/signup" element={user ? <Navigate to="/" /> : null} />
 
           <Route
             path="/profile"
@@ -243,10 +232,17 @@ export const MainView = () => {
                 ) : movies.length === 0 ? (
                   <Col>The list is empty!</Col>
                 ) : (
-                  <Container fluid className="mt-4 px-4" >
+                  <Container fluid className="mt-4 px-4">
                     <Row className="gx-4 gy-4 justify-content-center">
                       {movies.map((movie) => (
-                        <Col className="mb-4" key={movie._id} xs={12} sm={6} md={4} lg={3} >
+                        <Col
+                          className="mb-4"
+                          key={movie._id}
+                          xs={12}
+                          sm={6}
+                          md={4}
+                          lg={3}
+                        >
                           <MovieCard movie={movie} />
                         </Col>
                       ))}
@@ -261,7 +257,3 @@ export const MainView = () => {
     </>
   );
 };
-
-
-
-

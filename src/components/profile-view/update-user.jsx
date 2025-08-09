@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
+import { useState } from 'react';
+import { Form, Button, FloatingLabel, Row, Col } from 'react-bootstrap';
 
 export const UpdateUser = ({ user, token, setUser, onClose }) => {
   const [username, setUsername] = useState(user.Username);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [email, setEmail] = useState(user.Email);
-  const [birthday, setBirthday] = useState(user.Birthday?.slice(0, 10) || "");
+  const [birthday, setBirthday] = useState(user.Birthday?.slice(0, 10) || '');
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (newPassword && newPassword !== confirmPassword) {
-      alert("Passwords do not match");
+      alert('Passwords do not match');
       return;
     }
 
@@ -22,33 +22,38 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
       currentPassword,
       newPassword,
       email,
-      birthday
+      birthday,
     };
 
     console.log('Submitting update with token:', token);
 
-    fetch(`https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`, {
-      method: "PUT",
-      body: JSON.stringify(updatedData),
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+    fetch(
+      `https://young-tor-59565-22774666cdbf.herokuapp.com/users/${user.Username}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(updatedData),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       }
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then((updatedUser) => {
-          alert("Profile updated");
-          setUser(updatedUser);
-          localStorage.setItem("user", JSON.stringify(updatedUser));
-          onClose?.();
-        });
-      } else {
-        alert("Update failed");
-      }
-    }).catch((err) => {
-      console.error("Update error", err);
-      alert("An error occurred during update");
-    });
+    )
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((updatedUser) => {
+            alert('Profile updated');
+            setUser(updatedUser);
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            onClose?.();
+          });
+        } else {
+          alert('Update failed');
+        }
+      })
+      .catch((err) => {
+        console.error('Update error', err);
+        alert('An error occurred during update');
+      });
   };
 
   return (
@@ -82,7 +87,10 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
           </Col>
 
           <Col md={6}>
-            <FloatingLabel controlId="formCurrentPassword" label="Current Password">
+            <FloatingLabel
+              controlId="formCurrentPassword"
+              label="Current Password"
+            >
               <Form.Control
                 type="password"
                 placeholder=" "
@@ -108,7 +116,10 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
           </Col>
 
           <Col md={6}>
-            <FloatingLabel controlId="formConfirmPassword" label="Confirm New Password">
+            <FloatingLabel
+              controlId="formConfirmPassword"
+              label="Confirm New Password"
+            >
               <Form.Control
                 type="password"
                 placeholder=" "
@@ -137,7 +148,9 @@ export const UpdateUser = ({ user, token, setUser, onClose }) => {
         </Row>
 
         <div className="d-flex justify-content-between mt-4">
-          <Button variant="outline-primary" type="submit">Update</Button>
+          <Button variant="outline-primary" type="submit">
+            Update
+          </Button>
         </div>
       </Form>
     </div>

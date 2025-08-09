@@ -1,6 +1,6 @@
-import { Col, Card, Row, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { Col, Card, Row, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 export const FavoriteMovies = ({ user, movies, handleRemoveFavorite }) => {
   const favoriteMovies = user.FavoriteMovies?.map((movieID) =>
@@ -24,15 +24,15 @@ export const FavoriteMovies = ({ user, movies, handleRemoveFavorite }) => {
               <Card className="cards position-relative">
                 <Link
                   to={`/movies/${movie._id}`}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: 'none' }}
                 >
                   <Card.Img
                     variant="top"
                     src={movie.ImagePath}
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      display: "block",
+                      width: '100%',
+                      height: '100%',
+                      display: 'block',
                     }}
                     alt={movie.Title}
                   />

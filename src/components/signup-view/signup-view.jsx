@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { Form, Button, FloatingLabel, Row, Col } from "react-bootstrap";
+import { useState } from 'react';
+import { Form, Button, FloatingLabel, Row, Col } from 'react-bootstrap';
 
 export const SignupView = ({ onLoginClick }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,21 +15,21 @@ export const SignupView = ({ onLoginClick }) => {
       Username: username,
       Password: password,
       Email: email,
-      Birthday: birthday
+      Birthday: birthday,
     };
 
-    fetch("https://young-tor-59565-22774666cdbf.herokuapp.com/users", {
-      method: "POST",
+    fetch('https://young-tor-59565-22774666cdbf.herokuapp.com/users', {
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        'Content-Type': 'application/json',
+      },
     }).then((response) => {
       if (response.ok) {
-        alert("Signup successful");
+        alert('Signup successful');
         window.location.reload();
       } else {
-        alert("Signup failed");
+        alert('Signup failed');
       }
     });
   };
@@ -38,7 +37,6 @@ export const SignupView = ({ onLoginClick }) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-
         <Row className="g-3">
           <Col md={6}>
             <FloatingLabel controlId="formUsername" label="Username">
@@ -82,7 +80,10 @@ export const SignupView = ({ onLoginClick }) => {
           </Col>
 
           <Col md={6}>
-            <FloatingLabel controlId="formConfirmPassword" label="Confirm Password">
+            <FloatingLabel
+              controlId="formConfirmPassword"
+              label="Confirm Password"
+            >
               <Form.Control
                 type="password"
                 placeholder=" "
@@ -109,7 +110,9 @@ export const SignupView = ({ onLoginClick }) => {
             </FloatingLabel>
           </Col>
         </Row>
-        <Button variant="outline-primary" type="submit" className="mt-3">Register</Button>
+        <Button variant="outline-primary" type="submit" className="mt-3">
+          Register
+        </Button>
       </Form>
 
       <div className="mt-3 text-center">
@@ -118,7 +121,7 @@ export const SignupView = ({ onLoginClick }) => {
           type="button"
           className="btn btn-link p-1 mb-1"
           onClick={onLoginClick}
-          style={{ textDecoration: "underline" }}
+          style={{ textDecoration: 'underline' }}
         >
           Log in here
         </button>
@@ -126,7 +129,3 @@ export const SignupView = ({ onLoginClick }) => {
     </>
   );
 };
-
-
-
-
