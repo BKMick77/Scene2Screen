@@ -1,4 +1,3 @@
-import { Row, Col, Container } from 'react-bootstrap';
 import { FavoriteMovies } from './favorite-movies';
 
 export const ProfileView = ({ user, token, setUser, movies }) => {
