@@ -15,6 +15,7 @@
 - Add or remove favorite movies
 - View and update user profile information
 - Delete user account
+- Fuzzy search of movies by title
 
 ## Technology Used
 
