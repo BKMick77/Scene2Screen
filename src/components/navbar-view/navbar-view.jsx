@@ -1,4 +1,3 @@
-// NavbarView.jsx
 import { Navbar, Container, Nav, NavDropdown, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useMemo } from 'react';
