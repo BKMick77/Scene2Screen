@@ -2,6 +2,8 @@
 
 ## Check out the live app [Scene2Screen](https://scene2screen.dev/)
 
+<img src="public/assets/movie-card.png" width="100%" />
+
 ## App Features
 
 - Full stack movie database application with user authentication
@@ -32,6 +34,7 @@
 
 - User submitted reviews
 - User sorting of movies
+- Email verification during user onboarding
 
 ## Learning Experience
 
