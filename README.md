@@ -50,6 +50,5 @@
  <img src="public/assets/movie-view-parasite.png" width="100%" />
  <img src="public/assets/movie-view-twbb.png" width="100%" />
  <img src="public/assets/director-modal.png" width="100%" />
- <img src="public/assets/movie-card.png" width="100%" />
  <img src="public/assets/favorite-view.png" width="100%" />
  <img src="public/assets/update-user.png" width="100%" />
